@@ -1,0 +1,12 @@
+{
+    "rules": {
+        "indentation": 2,
+        "color-hex-case": "upper",
+        "no-eol-whitespace": true,
+        "rule-empty-line-before": "always-multi-line",
+        "declaration-block-trailing-semicolon": "always",
+        "declaration-block-no-duplicate-properties": true,
+        "max-empty-lines": 1,
+        "declaration-colon-space-after": "always-single-line"
+    }
+}

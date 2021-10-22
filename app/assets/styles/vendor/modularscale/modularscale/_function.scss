@@ -7,7 +7,7 @@
 
   // Render target values from settings.
   @if unit($ratio) != '' {
-    $ratio: ms-target($ratio,$base)
+    $ratio: ms-target($ratio,$base);
   }
 
   // Fast calc if not multi stranded

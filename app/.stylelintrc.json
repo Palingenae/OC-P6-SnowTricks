@@ -24,6 +24,7 @@
                 ]
             }
         ],
-        "declaration-bang-space-before": "always"
+        "declaration-bang-space-before": "always",
+        "block-closing-brace-newline-before": "always"
     }
 }

@@ -1,13 +1,13 @@
 @function ms-function($v: 0, $base: false, $ratio: false, $thread: false, $settings: $modularscale) {
 
   // Parse settings
-  $ms-settings: ms-settings($base,$ratio,$thread,$settings);
+  $ms-settings: ms-settings($base, $ratio, $thread, $settings);
   $base: nth($ms-settings, 1);
   $ratio: nth($ms-settings, 2);
 
   // Render target values from settings.
   @if unit($ratio) != '' {
-    $ratio: ms-target($ratio,$base);
+    $ratio: ms-target($ratio, $base);
   }
 
   // Fast calc if not multi stranded
@@ -16,12 +16,12 @@
   }
 
   // Create new base array
-  $ms-bases: nth($base,1);
+  $ms-bases: nth($base, 1);
 
   // Normalize base values
   @for $i from 2 through length($base) {
     // initial base value
-    $ms-base: nth($base,$i);
+    $ms-base: nth($base, $i);
     // If the base is bigger than the main base
     @if($ms-base > nth($base,1)) {
       // divide the value until it aligns with main base.
@@ -38,7 +38,7 @@
       }
     }
     // Push into new array
-    $ms-bases: append($ms-bases,$ms-base);
+    $ms-bases: append($ms-bases, $ms-base);
   }
 
   // Sort array from smallest to largest.

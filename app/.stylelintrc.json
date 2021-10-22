@@ -10,6 +10,9 @@
         "declaration-block-trailing-semicolon": "always",
         "declaration-block-no-duplicate-properties": true,
         "max-empty-lines": 1,
-        "declaration-colon-space-after": "always-single-line"
+        "declaration-colon-space-after": "always-single-line",
+        "function-comma-space-after": "always",
+        "no-missing-end-of-source-newline": true,
+        "declaration-block-semicolon-space-before": "never"
     }
 }

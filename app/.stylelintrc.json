@@ -15,7 +15,17 @@
         "no-missing-end-of-source-newline": true,
         "declaration-block-semicolon-space-before": "never",
         "at-rule-name-space-after": "always",
-        "at-rule-empty-line-before": "always",
+        "at-rule-empty-line-before": [ "always",
+            {
+                "except" : [
+                    "after-same-name",
+                    "inside-block",
+                    "blockless-after-same-name-blockless",
+                    "blockless-after-blockless", 
+                    "first-nested"
+                ]
+            }
+        ],
         "declaration-bang-space-before": "always"
     }
 }

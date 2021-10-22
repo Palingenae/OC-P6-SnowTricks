@@ -6,12 +6,15 @@
   $ratio: nth($ms-settings, 2);
 
   // Render target values from settings.
+
   @if unit($ratio) != '' {
     $ratio: ms-target($ratio, $base);
   }
 
   // Fast calc if not multi stranded
-  @if(length($base) == 1) {
+
+  @if (length($base) == 1) {
+
     @return ms-pow($ratio, $v) * $base;
   }
 
@@ -19,20 +22,25 @@
   $ms-bases: nth($base, 1);
 
   // Normalize base values
+
   @for $i from 2 through length($base) {
     // initial base value
     $ms-base: nth($base, $i);
     // If the base is bigger than the main base
-    @if($ms-base > nth($base,1)) {
+
+    @if ($ms-base > nth($base,1)) {
       // divide the value until it aligns with main base.
-      @while($ms-base > nth($base,1)) {
+
+      @while ($ms-base > nth($base,1)) {
         $ms-base: $ms-base / $ratio;
       }
       $ms-base: $ms-base * $ratio;
     }
     // If the base is smaller than the main base.
+
     @else if ($ms-base < nth($base,1)) {
       // pump up the value until it aligns with main base.
+
       @while $ms-base < nth($base,1) {
         $ms-base: $ms-base * $ratio;
       }

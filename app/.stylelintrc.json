@@ -4,7 +4,7 @@
       ],
     "rules": {
         "indentation": 2,
-        "color-hex-case": "upper",
+        "color-hex-case": "lower",
         "no-eol-whitespace": true,
         "rule-empty-line-before": "always-multi-line",
         "declaration-block-trailing-semicolon": "always",

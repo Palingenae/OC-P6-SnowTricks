@@ -1,0 +1,70 @@
+/* ----- Colours ----- */
+$colour-main: #2F243A;
+$colour-main-700: #523F64;
+$colour-main-400: #71568A;
+$colour-main-300: #9075A9;
+
+$colour-danger-900: #672836;
+$colour-danger-700: #93394D;
+$colour-danger: #B6465F;
+$colour-danger-300: #CC7B8C;
+$colour-danger-200: #DDA7B3;
+
+$colour-warning-900 : #E06C00;
+$colour-warning-700 : #FF8B1F;
+$colour-warning : #B97A37;
+$colour-warning-300 : #FFCA99;
+$colour-warning-200 : #FFEAD6;
+
+$colour-info-900: #0A2C48;
+$colour-info-700: #114D7E;
+$colour-info: #186EB4;
+$colour-info-300: #288EE2;
+$colour-info-200: #5DAAE9;
+$colour-info-100: #93C6F0;
+
+$colour-success-900: #0E4442;
+$colour-success-700: #187774;
+$colour-success: #20A39E;
+$colour-success-300: #33D7D1;
+$colour-success-200: #77E4E0;
+
+$grey-100: #F4F4F4;
+$grey-200: #DFDFDF;
+$grey-300: #CACACA;
+$grey-400: #B5B5B5;
+$grey-500: #A0A0A0;
+$grey-600: #737373;
+$grey-700: #5A5A5A;
+$grey-800: #404040;
+$grey-900: #272727;
+$grey-1000: #0D0D0D;
+
+/* ----- Typography ----- */
+
+$font-display: "Romantika Hidup", serif;
+$font-text: "Manrope", sans-serif;
+// $font-mono : "Recursive", monospace;
+$modularscale: (
+  base: 16px,
+  ratio: 1.33
+);
+
+$text-width: 60rem !default;
+$block-width: 90rem !default;
+
+/* ----- Spacing ----- */
+$spacing-kerning: normal;
+$spacing-letter-spacing-display: 0.2rem;
+$spacing-letter-spacing-title: 0.1rem;
+$spacing-letter-spacing-text: 0.05rem;
+$spacing-display-line-height: 1.33;
+$spacing-text-line-height: 1.4;
+$spacing-padding: 2rem;
+$spacing-margin: 2rem;
+
+$spacing-xsmall: 0.5rem;
+$spacing-small: 1rem;
+$spacing-medium: 2rem;
+$spacing-large: 4rem;
+$spacing-xlarge: 8rem;

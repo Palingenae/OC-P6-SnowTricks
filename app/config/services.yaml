@@ -4,6 +4,15 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    app_env: '%env(resolve:APP_ENV)%'
+    app_secret: '%env(resolve:APP_SECRET)%'
+
+    doctrine.dbal.url: '%env(resolve:DATABASE_URL)%'
+    database_user: '%env(resolve:DATABASE_USER)%'
+    database_password: '%env(resolve:DATABASE_PASSWORD)%'
+    database_name: '%env(resolve:DATABASE_NAME)%'
+    database_root_password: '%env(resolve:DATABASE_ROOT_PASSWORD)%'
+    database_host: '%env(resolve:DATABASE_HOST)%'
 
 services:
     # default configuration for services in *this* file

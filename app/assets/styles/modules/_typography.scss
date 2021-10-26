@@ -12,3 +12,8 @@
   font-style: normal;
   src: url('../../fonts/RomantikaHidup/RomantikaHidup.otf');
 }
+
+h1 {
+  font-family: $font-display;
+  font-size: ms(9);
+}

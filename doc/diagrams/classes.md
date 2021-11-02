@@ -1,5 +1,5 @@
 ```mermaid
-    %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#93C6F0', 'primaryTextColor': '#2F243A', 'fontFamily': 'Cartograph CF'}}}%%
+    %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#93C6F0', 'primaryTextColor': '#2F243A', 'fontFamily': 'consolas'}}}%%
     classDiagram
         class ClassDiagram {
             BuildWith MermaidJS

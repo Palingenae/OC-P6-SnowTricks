@@ -1,7 +1,7 @@
 ```mermaid
     erDiagram
         Entity_Relations_Diagram {
-            BuildWith MermaidJS
+            BuiltWith MermaidJS
         }
         TRICK ||--|{ TRICKGROUP: belongs
         TRICK ||--|{ IMAGE: has

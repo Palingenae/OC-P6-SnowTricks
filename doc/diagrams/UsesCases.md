@@ -5,13 +5,14 @@
             USER((USER)) --> TB([Display a Trick])
             USER((USER)) --> TC([Display the conversation in a trick])
             USER((USER)) --> UA([Access to login page])
-            UA --->|<< extend >>| UM{Login}
+            UA --->|<< include >>| UM([Login])
             USER((USER)) --> UB([Access to sign up page])
-            UB --->|<< extend >>| UM
-            UM --->|<< include >>| TM
-            UM --->|<< include >>| TN
-            UM --->|<< include >>| TO
-            UM --->|<< include >>| TP
+            UB --->|<< extends >>| UM
+            UM --->|<< extends >>| TM
+            UM --->|<< extends >>| TN
+            UM --->|<< extends >>| TO
+            UM --->|<< extends >>| TP
+
         subgraph PUBLIC_ACCESS
             TA([Display Tricks list])
             TB([Display a Trick])

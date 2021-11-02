@@ -2,7 +2,7 @@
     %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#93C6F0', 'primaryTextColor': '#2F243A', 'fontFamily': 'consolas'}}}%%
     classDiagram
         class ClassDiagram {
-            BuildWith MermaidJS
+            BuiltWith MermaidJS
         }
         Trick "1" --> "0..n" TrickGroup: belongs to
         Trick "1" --> "0..n" Image: has

@@ -7,19 +7,21 @@
         U ->> T: Click on the "Log In" link
         activate U
         activate T
-        activate S
         T -->> S: Receives Request
+        activate S
         S -->> T: Sends Response
         T -->> U: Renders the form
         U ->> T: Enters credentials
         U ->> T: Submits form
         T -->> S: Receives Request
         S -->> D: Checks Data
+        activate D
         D -->> S: Sends Data
+        deactivate D
         S -->> S: Saves User's connection
         S -->> T: Sends Response
-        T -->> U: Redirects to homepage
         deactivate S
+        T -->> U: Redirects to homepage
         deactivate T
         deactivate U
 ```

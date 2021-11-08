@@ -1,0 +1,30 @@
+{
+    "plugins": [
+        "stylelint-scss"
+      ],
+    "rules": {
+        "indentation": 2,
+        "color-hex-case": "lower",
+        "no-eol-whitespace": true,
+        "rule-empty-line-before": "always-multi-line",
+        "declaration-block-trailing-semicolon": "always",
+        "declaration-block-no-duplicate-properties": true,
+        "max-empty-lines": 1,
+        "declaration-colon-space-after": "always-single-line",
+        "function-comma-space-after": "always",
+        "no-missing-end-of-source-newline": true,
+        "declaration-block-semicolon-space-before": "never",
+        "at-rule-name-space-after": "always",
+        "at-rule-empty-line-before": [ "always",
+            {
+                "except" : [
+                    "after-same-name",
+                    "inside-block",
+                    "first-nested"
+                ]
+            }
+        ],
+        "declaration-bang-space-before": "always",
+        "block-closing-brace-newline-before": "always"
+    }
+}

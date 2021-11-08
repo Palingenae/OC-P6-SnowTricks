@@ -1,19 +1,25 @@
 ```mermaid
     sequenceDiagram
         participant U as <<Actor>><br/>User
-        participant F as <<Interface>><br/>Front-End Twig
+        participant T as <<Interface>><br/>Front-End / Twig
         participant S as <<Interface>><br/>Symfony
         participant D as <<Interface>><br/>Database / Doctrine
-        U ->> F: Click on the "Log In" link
+        U ->> T: Click on the "Log In" link
         activate U
-        activate F
+        activate T
         activate S
-        F -->> S: Receives Request
-        S -->> F: Sends Response
-        F -->> U: Renders the form
-        U ->> F: Enters credentials
-        U ->> F: Validates credentials
-        F -->> S: Receives Request
+        T -->> S: Receives Request
+        S -->> T: Sends Response
+        T -->> U: Renders the form
+        U ->> T: Enters credentials
+        U ->> T: Submits form
+        T -->> S: Receives Request
         S -->> D: Checks Data
         D -->> S: Sends Data
+        S -->> S: Saves User's connection
+        S -->> T: Sends Response
+        T -->> U: Redirects to homepage
+        deactivate S
+        deactivate T
+        deactivate U
 ```

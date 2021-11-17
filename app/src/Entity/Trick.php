@@ -51,7 +51,8 @@ class Trick
     private $messages;
 
     /**
-     * @ORM\OneToMany(targetEntity=TrickGroup::class, mappedBy="tricks")
+     * @ORM\ManyToOne(targetEntity=TrickGroup::class, inversedBy="tricks")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $trickGroup;
 
@@ -59,7 +60,6 @@ class Trick
     {
         $this->images = new ArrayCollection();
         $this->messages = new ArrayCollection();
-        $this->trickGroup = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,32 +199,14 @@ class Trick
         return $this;
     }
 
-    /**
-     * @return Collection|TrickGroup[]
-     */
-    public function getTrickGroup(): Collection
+    public function getTrickGroup(): ?TrickGroup
     {
         return $this->trickGroup;
     }
 
-    public function addTrickGroup(TrickGroup $trickGroup): self
+    public function setTrickGroup(?TrickGroup $trickGroup): self
     {
-        if (!$this->trickGroup->contains($trickGroup)) {
-            $this->trickGroup[] = $trickGroup;
-            $trickGroup->setTricks($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrickGroup(TrickGroup $trickGroup): self
-    {
-        if ($this->trickGroup->removeElement($trickGroup)) {
-            // set the owning side to null (unless already changed)
-            if ($trickGroup->getTricks() === $this) {
-                $trickGroup->setTricks(null);
-            }
-        }
+        $this->trickGroup = $trickGroup;
 
         return $this;
     }

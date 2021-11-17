@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TrickGroupRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,9 +25,14 @@ class TrickGroup
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Trick::class, inversedBy="trickGroup")
+     * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="trickGroup")
      */
     private $tricks;
+
+    public function __construct()
+    {
+        $this->tricks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,14 +51,32 @@ class TrickGroup
         return $this;
     }
 
-    public function getTricks(): ?Trick
+    /**
+     * @return Collection|Trick[]
+     */
+    public function getTricks(): Collection
     {
         return $this->tricks;
     }
 
-    public function setTricks(?Trick $tricks): self
+    public function addTrick(Trick $trick): self
     {
-        $this->tricks = $tricks;
+        if (!$this->tricks->contains($trick)) {
+            $this->tricks[] = $trick;
+            $trick->setTrickGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrick(Trick $trick): self
+    {
+        if ($this->tricks->removeElement($trick)) {
+            // set the owning side to null (unless already changed)
+            if ($trick->getTrickGroup() === $this) {
+                $trick->setTrickGroup(null);
+            }
+        }
 
         return $this;
     }

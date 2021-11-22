@@ -55,8 +55,18 @@ class User
      */
     private $messages;
 
-    public function __construct()
-    {
+    public function __construct(
+        string $firstname,
+        string $lastname,
+        string $username,
+        string $email,
+        string $password
+    ) {
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
         $this->messages = new ArrayCollection();
     }
 

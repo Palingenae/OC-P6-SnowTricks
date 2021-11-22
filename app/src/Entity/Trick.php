@@ -41,7 +41,7 @@ class Trick
     private $coverImage;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="trick")
+     * @ORM\OneToMany(targetEntity=Image::class, cascade={"persist"}, mappedBy="trick")
      */
     private $images;
 
@@ -56,8 +56,16 @@ class Trick
      */
     private $trickGroup;
 
-    public function __construct()
-    {
+    public function __construct(
+        string $name,
+        string $description,
+        string $slug,
+        Image $coverImage
+    ) {
+        $this->name = $name;
+        $this->description = $description;
+        $this->slug = $slug;
+        $this->coverImage = $coverImage;
         $this->images = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }

@@ -2,14 +2,15 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
 use App\Entity\Image;
 use App\Entity\Message;
 use App\Entity\Trick;
 use App\Entity\TrickGroup;
 use App\Entity\User;
-use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Exception;
 use Faker\Factory;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
@@ -120,15 +121,23 @@ class AppFixtures extends Fixture
             $designatedUser = rand(1, 20);
             $user = $userRepository->find($designatedUser);
 
+            if (!$user instanceof User) {
+                throw new Exception('Cannot make an user');
+            }
+
             $designatedTrick = rand(1, 12);
             $trick = $trickRepository->find($designatedTrick);
+
+            if (!$trick instanceof Trick) {
+                throw new Exception('Cannot make a trick');
+            }
 
             $createdAt = new DateTime();
 
             $message = new Message(
                 $user,
                 $trick,
-                $faker->paragraphs(1, 3),
+                $faker->paragraph(1, 8),
                 $createdAt
             );
 
@@ -138,7 +147,8 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
+
     {
         $this->loadUsers($manager);
         $this->loadTricks($manager);

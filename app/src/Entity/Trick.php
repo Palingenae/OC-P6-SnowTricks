@@ -17,44 +17,44 @@ class Trick
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private string $description;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $slug;
+    private string $slug;
 
     /**
      * @ORM\OneToOne(targetEntity=Image::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $coverImage;
+    private Image $coverImage;
 
     /**
      * @ORM\OneToMany(targetEntity=Image::class, cascade={"persist"}, mappedBy="trick")
      */
-    private $images;
+    private Collection $images;
 
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="trick", orphanRemoval=true)
      */
-    private $messages;
+    private Collection $messages;
 
     /**
      * @ORM\ManyToOne(targetEntity=TrickGroup::class, inversedBy="tricks")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trickGroup;
+    private TrickGroup $trickGroup;
 
     public function __construct(
         string $name,
@@ -111,12 +111,12 @@ class Trick
         return $this;
     }
 
-    public function getCoverImage()
+    public function getCoverImage(): Image
     {
         return $this->coverImage;
     }
 
-    public function setCoverImage($coverImage): self
+    public function setCoverImage(Image $coverImage): self
     {
         $this->coverImage = $coverImage;
 

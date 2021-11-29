@@ -35,13 +35,13 @@ class Trick
     private string $slug;
 
     /**
-     * @ORM\OneToOne(targetEntity=Image::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Image::class, cascade={"persist", "remove", "refresh", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private Image $coverImage;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, cascade={"persist"}, mappedBy="trick")
+     * @ORM\OneToMany(targetEntity=Image::class, cascade={"persist", "remove", "refresh"}, mappedBy="trick")
      */
     private Collection $images;
 

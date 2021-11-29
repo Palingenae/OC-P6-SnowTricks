@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
-use DateTime;
 use App\Entity\Image;
 use App\Entity\Message;
 use App\Entity\Trick;
 use App\Entity\TrickGroup;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Exception;
@@ -16,9 +16,15 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class AppFixtures extends Fixture
 {
+    public function __construct()
+    {
+        $this->userArray = [];
+        $this->trickArray = [];
+    }
+
     public function loadUsers(ObjectManager $manager): void
     {
-        for ($i = 0; $i >= 19; ++$i) {
+        for ($i = 0; $i <= 19; ++$i) {
             $faker = Factory::create();
             $username = $faker->userName();
 
@@ -30,9 +36,12 @@ class AppFixtures extends Fixture
                 $faker->password(8, 32)
             );
 
+            $this->userArray[] = $user;
+
             $manager->persist($user);
-            $manager->flush();
         }
+
+        $manager->flush();
     }
 
     public function loadTricks(ObjectManager $manager): void
@@ -76,32 +85,40 @@ class AppFixtures extends Fixture
                     $faker = Factory::create();
                     $slugger = new AsciiSlugger();
 
-                    $image = new Image(
-                        'Placeholder Image',
+                    $coverImage = new Image(
+                        'Cover Image',
                         'https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
-                        'Placeholder Image'
+                        'Cover Image'
                     );
-
-                    $manager->persist($image);
-                    $manager->flush();
 
                     $trick = new Trick(
                         $trick,
                         $faker->paragraph(3, 5),
                         $slugger->slug($trick),
-                        $image
+                        $coverImage
                     );
+
+                    $manager->persist($coverImage);
+                    $manager->flush();
 
                     $trick->setTrickGroup($group);
-                    $trick->addImage(
-                        new Image(
-                            'Placeholder Image',
-                            'https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
-                            'Placeholder Image'
-                        )
+
+                    $placeholderImage = new Image(
+                        'Placeholder Image',
+                        'https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+                        'Placeholder Image'
                     );
 
+                    $manager->persist($placeholderImage);
                     $manager->persist($trick);
+
+                    $coverImage->setTrick($trick);
+
+                    $manager->flush();
+
+                    $trick->addImage($placeholderImage);
+
+                    $this->trickArray[] = $trick;
                 }
             }
         }
@@ -112,21 +129,18 @@ class AppFixtures extends Fixture
     public function loadMessages(
         ObjectManager $manager
     ): void {
-        $userRepository = $manager->getRepository(User::class);
-        $trickRepository = $manager->getRepository(Trick::class);
-
-        for ($i = 0; $i >= 40; ++$i) {
+        for ($i = 0; $i <= 40; ++$i) {
             $faker = Factory::create();
 
-            $designatedUser = rand(1, 20);
-            $user = $userRepository->find($designatedUser);
+            $designatedUser = rand(0, 19);
+            $user = $this->userArray[$designatedUser];
 
             if (!$user instanceof User) {
                 throw new Exception('Cannot make an user');
             }
 
-            $designatedTrick = rand(1, 12);
-            $trick = $trickRepository->find($designatedTrick);
+            $designatedTrick = rand(0, 11);
+            $trick = $this->trickArray[$designatedTrick];
 
             if (!$trick instanceof Trick) {
                 throw new Exception('Cannot make a trick');
@@ -148,7 +162,6 @@ class AppFixtures extends Fixture
     }
 
     public function load(ObjectManager $manager): void
-
     {
         $this->loadUsers($manager);
         $this->loadTricks($manager);

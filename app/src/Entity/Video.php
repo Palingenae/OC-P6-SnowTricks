@@ -20,7 +20,7 @@ class Video
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private  string $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)

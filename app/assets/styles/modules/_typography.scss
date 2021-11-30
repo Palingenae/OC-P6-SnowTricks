@@ -15,5 +15,138 @@
 
 h1 {
   font-family: $font-display;
-  font-size: ms(9);
+  font-variation-settings:
+    'wght' 800,
+    'SOFT' 30,
+    'WONK' 1,
+    'opsz' 80;
+  margin-bottom: $spacing-medium;
+  // @include very-very-large-display {
+  //   font-size: ms(7);
+  // }
+
+  // @include very-large-display {
+  //   font-size: ms(6);
+  // }
+
+  // @include large-display {
+  //   font-size: ms(6);
+  // }
+
+  // @include medium-display {
+  //   font-size: ms(6);
+  // }
+
+  // @include small-display {
+  //   font-size: ms(4);
+  // }
+}
+
+h2 {
+  font-family: $font-display;
+  font-variation-settings:
+    'wght' 600,
+    'SOFT' 40,
+    'WONK' 1,
+    'opsz' 80;
+  margin-bottom: $spacing-medium;
+  // @include very-very-large-display {
+  //   font-size: ms(6);
+  // }
+
+  // @include very-large-display {
+  //   font-size: ms(5);
+  // }
+
+  // @include large-display {
+  //   font-size: ms(5);
+  // }
+
+  // @include medium-display {
+  //   font-size: ms(4);
+  // }
+
+  // @include small-display {
+  //   font-size: ms(3);
+  // }
+}
+
+h3 {
+  font-family: $font-text;
+  font-size: ms(3);
+  font-variation-settings: 'wght' 600;
+  margin-bottom: $spacing-large;
+  // @include small-display {
+  //   font-size: ms(2);
+  // }
+}
+
+h4 {
+  font-family: $font-text;
+  font-size: ms(2);
+  margin-bottom: $spacing-medium;
+  // @include small-display {
+  //   font-size: ms(1);
+  // }
+}
+
+p {
+  font: {
+    family: $font-text;
+    weight: 400;
+    size: ms(1);
+    variation-settings: 'wght' 350;
+  }
+  margin-bottom: $spacing-small;
+}
+
+.paragraph {
+  @extend p;
+
+  &--lead {
+    font-size: ms(1);
+    font-variation-settings: 'wght' 600;
+    font-style: italic;
+  }
+
+  &--jumbo {
+    color: $grey-800;
+    font-size: ms(2);
+    font-weight: 300;
+    max-width: $text-width;
+    margin-bottom: $spacing-medium;
+  }
+}
+
+.user-interactions {
+  @extend p;
+  font-size: ms(1);
+}
+
+.section-title {
+  @extend p;
+  font-size: ms(2);
+  font-variation-settings: 'wght' 500;
+}
+
+/* ----- Giving all labor elements the same line-height and letter spacing no matter the context ----- */
+
+a,
+b,
+p,
+em,
+strong,
+span,
+ul,
+li {
+  color: $grey-900;
+  font-family: $font-text;
+  line-height: $spacing-text-line-height;
+  letter-spacing: $spacing-letter-spacing-text;
+}
+
+.italic,
+i,
+em {
+  font-style: italic;
 }

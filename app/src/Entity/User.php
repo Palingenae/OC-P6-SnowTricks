@@ -18,42 +18,42 @@ class User
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $firstname;
+    private string $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $lastname;
+    private string $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $username;
+    private string $username;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\OneToOne(targetEntity=Image::class, cascade={"persist", "remove"})
      */
-    private $profileImage;
+    private Image $profileImage;
 
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="writer")
      */
-    private $messages;
+    private Collection $messages;
 
     public function __construct(
         string $firstname,

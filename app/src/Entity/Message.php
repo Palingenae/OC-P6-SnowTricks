@@ -16,29 +16,29 @@ class Message
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="messages")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $writer;
+    private User $writer;
 
     /**
      * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="messages")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $trick;
+    private Trick $trick;
 
     /**
      * @ORM\Column(type="text", length=255)
      */
-    private $content;
+    private string $content;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private DateTime $createdAt;
 
     public function __construct(
         User $writer,
@@ -62,7 +62,7 @@ class Message
         return $this->writer;
     }
 
-    public function setWriter(?User $writer): self
+    public function setWriter(?User $writer): ?self
     {
         $this->writer = $writer;
 
@@ -74,7 +74,7 @@ class Message
         return $this->trick;
     }
 
-    public function setTrick(?Trick $trick): self
+    public function setTrick(?Trick $trick): ?self
     {
         $this->trick = $trick;
 

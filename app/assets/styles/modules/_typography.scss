@@ -19,19 +19,15 @@ h1 {
   @include from($screen-size-xl) {
     font-size: ms(7);
   }
-
   @include until($screen-size-xl) {
     font-size: ms(6);
   }
-
   @include until($screen-size-lg) {
     font-size: ms(6);
   }
-
   @include until($screen-size-md) {
     font-size: ms(5);
   }
-
   @include until($screen-size-sm) {
     font-size: ms(4);
   }
@@ -43,19 +39,15 @@ h2 {
   @include from($screen-size-xl) {
     font-size: ms(6);
   }
-
   @include until($screen-size-xl) {
     font-size: ms(5);
   }
-
   @include until($screen-size-lg) {
     font-size: ms(5);
   }
-
   @include until($screen-size-md) {
     font-size: ms(4);
   }
-
   @include until($screen-size-sm) {
     font-size: ms(3);
   }

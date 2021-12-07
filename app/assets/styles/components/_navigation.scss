@@ -1,13 +1,15 @@
 .navigation {
-    @extend .navbar;
-    &__brand {
-        @extend .navbar-brand;
-    }
-    &__menu {
-        @extend .navbar-menu;
-        @extend .navbar-end;
-    }
-    &__item {
-        @extend .navbar-item
-    }
+  @extend .navbar;
+
+  &__brand {
+    @extend .navbar-brand;
+  }
+
+  &__menu {
+    @extend .navbar-menu;
+    @extend .navbar-end;
+  }
+
+  &__item {
+    @extend .navbar-item; }
 }

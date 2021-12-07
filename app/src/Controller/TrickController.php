@@ -14,13 +14,13 @@ class TrickController extends AbstractController
     {
         $this->trickRepository = $trickRepository;
     }
-    
+
     public function index(): Response
     {
-        $tricks = $this->trickRepository->findBy([],['id'=> 'DESC'], 6);
+        $tricks = $this->trickRepository->findBy([], ['id' => 'DESC'], 6);
 
         return $this->render('homepage.html.twig', [
-            'tricks' => $tricks
+            'tricks' => $tricks,
         ]);
     }
 }

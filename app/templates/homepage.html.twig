@@ -9,8 +9,13 @@
         <p class="hero__display-text">Snowtricks</p>
     </section>
     <main class="main--centered">
-        <section class="list__tricks">
+        <section class="tricks__section">
             <h3>Derniers tricks ajoutés</h3>
+            <section class="trick__list">
+            {% for trick in tricks %}
+                {% include "components/trick.html.twig" %}
+            {% endfor %}
+            </section>
         </section>
     </main>
 {% endblock %}

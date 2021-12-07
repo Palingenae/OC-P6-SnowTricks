@@ -1,0 +1,30 @@
+.trick {
+    @extend .column;
+    @extend .is-one-third;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    transition: background-color 200ms ease-out;
+    padding-bottom: $spacing-medium;
+    margin-bottom: $spacing-small;
+    &:hover,
+    &:focus {
+        background-color: $grey-200;
+    }
+    @include until($screen-size-md) {
+        width: 100%;
+    }
+    &__image-container {
+        object-fit: cover;
+        margin-bottom: $spacing-small;
+
+    }
+    &__list {
+        @extend .columns;
+        display: flex;
+        flex-flow: row wrap;
+        @include until($screen-size-md) {
+            flex-flow: column;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+.hero {
+
+  &--homepage {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 66vh;
+    background-color: $colour-main;
+    background-image: url('../../images/snowboard-1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+  }
+
+  &__display-text {
+    font-family: $font-display;
+    color: $grey-100;
+    line-height: 1;
+    @include from($screen-size-xl) {
+      font-size: ms(11);
+    }
+    @include until($screen-size-xl) {
+      font-size: ms(10);
+    }
+    @include until($screen-size-lg) {
+      font-size: ms(9);
+    }
+    @include until($screen-size-md) {
+      font-size: ms(8);
+    }
+    @include until($screen-size-sm) {
+      font-size: ms(7);
+    }
+  }
+}

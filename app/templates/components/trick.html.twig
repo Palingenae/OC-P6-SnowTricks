@@ -3,7 +3,7 @@
         <img class="trick__image" src={{ trick.coverImage.url }}/>
     </div>
     <h4>
-        <a href="#">{{ trick.name }}</a>
+        <a href={{ path('display_trick', {slug: trick.slug}) }}>{{ trick.name }}</a>
     </h4>
     <p>{{ trick.trickgroup.name }}</p>
 </div>

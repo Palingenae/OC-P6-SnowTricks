@@ -34,22 +34,26 @@ h1 {
 }
 
 h2 {
-  font-family: $font-display;
-  margin-bottom: $spacing-medium;
+  font-family: $font-text;
   @include from($screen-size-xl) {
-    font-size: ms(6);
+    font-size: ms(5);
+    margin-bottom: $spacing-xlarge;
   }
   @include until($screen-size-xl) {
-    font-size: ms(5);
+    font-size: ms(4);
+    margin-bottom: $spacing-large;
   }
   @include until($screen-size-lg) {
-    font-size: ms(5);
+    font-size: ms(4);
+    margin-bottom: $spacing-large;
   }
   @include until($screen-size-md) {
-    font-size: ms(4);
+    font-size: ms(3);
+    margin-bottom: $spacing-medium;
   }
   @include until($screen-size-sm) {
     font-size: ms(3);
+    margin-bottom: $spacing-medium;
   }
 }
 

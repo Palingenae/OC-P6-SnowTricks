@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Trick;
 use App\Repository\TrickRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,18 +29,18 @@ class TrickController extends AbstractController
         $tricks = $this->trickRepository->findAll();
 
         return $this->render('tricks.html.twig', [
-            'tricks' => $tricks
+            'tricks' => $tricks,
         ]);
     }
 
     public function getOneTrick(string $slug): Response
     {
         $trick = $this->trickRepository->findOneBy([
-            'slug' => $slug
+            'slug' => $slug,
         ]);
 
         return $this->render('trick.html.twig', [
-            'trick' => $trick
+            'trick' => $trick,
         ]);
     }
 }

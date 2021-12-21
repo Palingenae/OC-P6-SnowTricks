@@ -5,13 +5,41 @@
 {% endblock %}
 
 {% block body %}
-    <section class="hero--homepage">
+    <section class="hero--trick">
         <p class="hero__display-text">{{ trick.name }}</p>
     </section>
     <main class="main">
+        <h2>Informations du trick</h2>
+        <section class="trick__mediaCollection">
+            <h3>Galerie</h3>
+            <div class="trick__mediasCollection__strip">
+            {# Ici : mettre un if avec des images si il y en a #}
+                {% if trick.images != null %}
+                    {% for image in trick.images %}
+                        {% if image != trick.coverImage %}
+                            <img class="trick__media" alt={{ image.description }} src={{ image.url }} />
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {# Ici : mettre un if avec des vidéos si il y en a #}
+        </section>
+        <section class="trick__details">
+            <h3>Description</h3>
+            <p class="trick__group">
+                <span class="label">Groupe:</span> {{ trick.trickGroup.name }}
+            </p>
+            <p class="trick__description">{{ trick.description }}</p>
+        </section>
+        <section class="messageContainer">
+        <h2>Messages</h2>
         {% for message in trick.messages %}
-            <p>{{ message.writer.firstname }} {{ message.writer.lastname }}</p>
-            <p>{{ message.content }}</p>
+            <div class="message">
+                <p class="message__writer">{{ message.writer.firstname }} {{ message.writer.lastname }}</p>
+                <p class="message__created">{{ message.createdAt | format_datetime('short') }}</p>
+                <p class="message__content">{{ message.content }}</p>
+            </div>
         {% endfor %}
+        </section>
     </main>
 {% endblock %}

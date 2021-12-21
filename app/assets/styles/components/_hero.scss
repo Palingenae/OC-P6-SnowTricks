@@ -1,16 +1,23 @@
 .hero {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 66vh;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
 
   &--homepage {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    height: 66vh;
-    background-color: $colour-main;
+    @extend .hero;
     background-image: url('../../images/snowboard-1.jpg');
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: overlay;
+    background-color: $colour-main;
+  }
+
+  &--trick {
+    @extend .hero;
+    background-image: url('../../images/snowboard-1.jpg');
+    background-color: $colour-info-900;
   }
 
   &__display-text {

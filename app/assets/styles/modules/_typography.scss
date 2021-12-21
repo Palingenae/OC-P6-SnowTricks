@@ -35,9 +35,10 @@ h1 {
 
 h2 {
   font-family: $font-text;
+  font-weight: 500;
   @include from($screen-size-xl) {
-    font-size: ms(5);
-    margin-bottom: $spacing-xlarge;
+    font-size: ms(4);
+    margin-bottom: $spacing-large;
   }
   @include until($screen-size-xl) {
     font-size: ms(4);
@@ -45,7 +46,7 @@ h2 {
   }
   @include until($screen-size-lg) {
     font-size: ms(4);
-    margin-bottom: $spacing-large;
+    margin-bottom: $spacing-medium;
   }
   @include until($screen-size-md) {
     font-size: ms(3);
@@ -61,7 +62,7 @@ h3 {
   font-family: $font-text;
   font-size: ms(3);
   font-variation-settings: 'wght' 600;
-  margin-bottom: $spacing-large;
+  margin-bottom: $spacing-medium;
   // @include small-display {
   //   font-size: ms(2);
   // }
@@ -131,8 +132,8 @@ li {
   letter-spacing: $spacing-letter-spacing-text;
 }
 
-.italic,
-i,
-em {
-  font-style: italic;
+.label {
+  display: inline;
+  font-size: inherit;
+  font-weight: 700;
 }

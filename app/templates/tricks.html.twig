@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    - Tous les tricks
+{% endblock %}
+
+{% block body %}
+    <main class="main--centered">
+        <section class="tricks__section">
+            <h2>Tous les tricks</h2>
+            <section class="trick__list">
+            {% for trick in tricks %}
+                {% include "components/trick.html.twig" %}
+            {% endfor %}
+            </section>
+        </section>
+    </main>
+{% endblock %}

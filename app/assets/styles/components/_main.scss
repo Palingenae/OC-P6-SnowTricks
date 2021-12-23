@@ -1,7 +1,7 @@
 .main {
   max-width: $block-width;
   padding: 0 $spacing-xlarge;
-  margin-top: $spacing-xlarge;
+  margin: $spacing-xlarge auto;
 
   &--centered {
     @extend .main;

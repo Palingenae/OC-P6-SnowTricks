@@ -23,4 +23,24 @@ class TrickController extends AbstractController
             'tricks' => $tricks,
         ]);
     }
+
+    public function getAllTricks(): Response
+    {
+        $tricks = $this->trickRepository->findAll();
+
+        return $this->render('tricks.html.twig', [
+            'tricks' => $tricks,
+        ]);
+    }
+
+    public function getOneTrick(string $slug): Response
+    {
+        $trick = $this->trickRepository->findOneBy([
+            'slug' => $slug,
+        ]);
+
+        return $this->render('trick.html.twig', [
+            'trick' => $trick,
+        ]);
+    }
 }

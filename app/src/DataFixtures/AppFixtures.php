@@ -12,29 +12,58 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Exception;
 use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class AppFixtures extends Fixture
 {
-    public function __construct()
+    private UserPasswordHasherInterface $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
+        $this->passwordHasher = $passwordHasher;
         $this->userArray = [];
         $this->trickArray = [];
     }
 
     public function loadUsers(ObjectManager $manager): void
     {
+        $admin = new User(
+            'Jimmy',
+            'Sweat',
+            'JimmySweat',
+            'jimmy.sweat@snowtricks.fr'
+        );
+
+        $adminPassword = $this->passwordHasher->hashPassword(
+            $admin,
+            'adminPassword'
+        );
+
+        $admin->setPassword($adminPassword);
+        $admin->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+
+        $manager->persist($admin);
+
         for ($i = 0; $i <= 19; ++$i) {
             $faker = Factory::create();
             $username = $faker->userName();
+            $clearPassword = 'userPassword';
 
             $user = new User(
                 $faker->firstName(),
                 $faker->lastName(),
                 $username,
-                $username.'@'.$faker->domainName(),
-                $faker->password(8, 32)
+                $username.'@'.$faker->domainName()
             );
+
+            $hashedPassword = $this->passwordHasher->hashPassword(
+                $user,
+                $clearPassword
+            );
+
+            $user->setPassword($hashedPassword);
+            $user->setRoles(['ROLE_USER']);
 
             $this->userArray[] = $user;
 

@@ -9,3 +9,7 @@ tricks:
 display_trick:
    path: /tricks/{slug}
    controller: App\Controller\TrickController::getOneTrick
+
+login:
+   path: /login
+   controller: App\Controller\AuthController::login

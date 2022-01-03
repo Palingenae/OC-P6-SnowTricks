@@ -13,3 +13,7 @@ display_trick:
 login:
    path: /login
    controller: App\Controller\AuthController::login
+
+logout:
+   path: /logout
+   methods: GET

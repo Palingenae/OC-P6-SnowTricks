@@ -17,3 +17,11 @@ login:
 logout:
    path: /logout
    methods: GET
+
+register:
+   path: /register
+   controller: App\Controller\RegistrationController::register
+
+app_verify_email:
+   path: /verify/email
+   controller: App\Controller\RegistrationController::verifyUserEmail

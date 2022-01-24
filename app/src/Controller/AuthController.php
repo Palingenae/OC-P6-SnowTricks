@@ -6,12 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class AuthController extends AbstractController 
+class AuthController extends AbstractController
 {
     public function login(
         AuthenticationUtils $authenticationUtils
-    ): Response
-    {
+    ): Response {
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();

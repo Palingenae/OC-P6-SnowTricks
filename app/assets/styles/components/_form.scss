@@ -11,4 +11,9 @@
         display: inline-block;
         margin-bottom: $spacing-xsmall;
     }
+    button[type="submit"] {
+        font-family: $font-text;
+        font-size: ms(0);
+        font-variation-settings: 'wght' 650;
+    }
 }

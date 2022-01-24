@@ -18,6 +18,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
+                'label' => 'Nom d\'utilisateur',
                 'attr' => [
                     'class' => 'input',
                 ],

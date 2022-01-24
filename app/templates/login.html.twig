@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+<main class="main--centered">
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <section class="section">
+        <h2>Connexion</h2>
+        <form class="form" action="{{ path('login') }}" method="post">
+            <div class="form__field">
+                <label class="form__label" for="username">Email:</label>
+                <input class="input" type="text" id="username" name="_username" value="{{ last_username }}"/>
+            </div>
+
+            <div class="form__field">
+                <label class="form__label" for="password">Mot de passe:</label>
+                <input class="input" type="password" id="password" name="_password"/>
+            </div>
+
+            <button class="button is-link" type="submit">Connexion</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,14 @@
+.form {
+    max-width: 30rem;
+    padding: $spacing-small 0;
+    &__field {
+        margin-bottom: $spacing-medium;
+    }
+    &__label {
+        @extend .label;
+        font-family: $font-text;
+        font-size: ms(1);
+        display: inline-block;
+        margin-bottom: $spacing-xsmall;
+    }
+}

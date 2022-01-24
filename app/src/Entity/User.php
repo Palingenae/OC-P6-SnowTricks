@@ -68,16 +68,7 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
-    public function __construct(
-        // string $firstname,
-        // string $lastname,
-        // string $username,
-        // string $email,
-    ) {
-        // $this->firstname = $firstname;
-        // $this->lastname = $lastname;
-        // $this->username = $username;
-        // $this->email = $email;
+    public function __construct() {
         $this->messages = new ArrayCollection();
     }
 

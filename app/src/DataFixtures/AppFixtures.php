@@ -28,10 +28,12 @@ class AppFixtures extends Fixture
 
     public function loadUsers(ObjectManager $manager): void
     {
-        $admin = new User(
-            'Jimmy',
-            'Sweat',
-            'JimmySweat',
+        $admin = new User();
+
+        $admin->setFirstname('Jimmy');
+        $admin->setLastname('Sweat');
+        $admin->setUsername('JimmySweat');
+        $admin->setEmail(
             'jimmy.sweat@snowtricks.fr'
         );
 
@@ -42,6 +44,7 @@ class AppFixtures extends Fixture
 
         $admin->setPassword($adminPassword);
         $admin->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+        $admin->setIsVerified(true);
 
         $manager->persist($admin);
 
@@ -50,10 +53,12 @@ class AppFixtures extends Fixture
             $username = $faker->userName();
             $clearPassword = 'userPassword';
 
-            $user = new User(
-                $faker->firstName(),
-                $faker->lastName(),
-                $username,
+            $user = new User();
+
+            $user->setFirstname($faker->firstName());
+            $user->setLastname($faker->lastName());
+            $user->setUsername($username);
+            $user->setEmail(
                 $username.'@'.$faker->domainName()
             );
 
@@ -64,6 +69,7 @@ class AppFixtures extends Fixture
 
             $user->setPassword($hashedPassword);
             $user->setRoles(['ROLE_USER']);
+            $user->setIsVerified(true);
 
             $this->userArray[] = $user;
 

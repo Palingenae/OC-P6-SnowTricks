@@ -8,8 +8,13 @@
         </a>
     </div>
     <div class="navigation__menu">
-        <a href={{ path('tricks') }} class="navigation__item">Tricks</a>
-        <a href={{ path('login') }} class="navigation__item">Connexion</a>
-        <a href={{ path('register') }} class="navigation__item">Inscription</a>
+        <a href={{ path('tricks') }} class="navigation__item">Tous les tricks</a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href='#' class="navigation__item">Ajouter un trick</a>
+            <a href={{ path('logout') }} class="navigation__item">Déconnexion</a>
+        {% else %}
+            <a href={{ path('login') }} class="navigation__item">Connexion</a>
+            <a href={{ path('register') }} class="navigation__item">Inscription</a>
+        {% endif %}
     </div>
 </nav>

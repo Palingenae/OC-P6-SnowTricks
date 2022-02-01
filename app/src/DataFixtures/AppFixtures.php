@@ -183,12 +183,12 @@ class AppFixtures extends Fixture
 
             $createdAt = new DateTime();
 
-            $message = new Message(
-                $user,
-                $trick,
-                $faker->paragraph(1, 8),
-                $createdAt
-            );
+            $message = new Message();
+
+            $message->setWriter($user);
+            $message->setTrick($trick);
+            $message->setContent($faker->paragraph(1, 50));
+            $message->setCreatedAt($createdAt);
 
             $manager->persist($message);
         }

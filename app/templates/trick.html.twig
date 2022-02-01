@@ -33,6 +33,16 @@
         </section>
         <section class="messageContainer">
         <h2>Messages</h2>
+        <div class="form form--message">
+            {{ form_start(messageTrickForm) }}
+                <div class="form__field">
+                    <h3>{{form_label(messageTrickForm.content)}}</h3>
+                    {{form_widget(messageTrickForm.content)}}
+                </div>
+                <button type="submit" class="button is-link">Valider le message</button>
+            {{ form_end(messageTrickForm) }}
+        </div>
+        <h3>Messages publiés</h3>
         {% for message in trick.messages %}
             <div class="message">
                 <p class="message__writer">{{ message.writer.firstname }} {{ message.writer.lastname }}</p>

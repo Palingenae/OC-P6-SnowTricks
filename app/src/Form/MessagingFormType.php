@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class MessagingFormType extends AbstractType
 {
@@ -20,7 +21,11 @@ class MessagingFormType extends AbstractType
                 'label' => 'Écrire un message',
                 'attr' => [
                     'class' => 'textarea'
-                ]
+                ],
+                'constraints' => new Length([
+                    'min' => 3,
+                    'max' => 255
+                ])
             ])
         ;
     }

@@ -2,6 +2,10 @@ index:
    path: /
    controller: App\Controller\TrickController::index
 
+new_trick:
+   path: /tricks/new
+   controller: App\Controller\TrickController::createTrick
+
 tricks:
    path: /tricks
    controller: App\Controller\TrickController::getAllTricks

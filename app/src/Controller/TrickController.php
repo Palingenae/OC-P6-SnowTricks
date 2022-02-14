@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Message;
+use App\Entity\Trick;
 use App\Form\MessagingFormType;
+use App\Form\TrickType;
 use App\Repository\TrickRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,6 +74,22 @@ class TrickController extends AbstractController
             'trick' => $trick,
             'user' => $user,
             'messageTrickForm' => $form->createView()
+        ]);
+    }
+
+    public function createTrick(Request $request): Response
+    {
+        $trick = new Trick();
+        $form = $this->createForm(TrickType::class, $trick);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            echo "hello";
+        }
+
+        return $this->render('new_trick.html.twig', [
+            'trick' => $trick,
+            'createTrickForm' => $form->createView(),
         ]);
     }
 }

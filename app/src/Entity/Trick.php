@@ -46,6 +46,10 @@ class Trick
     private Collection $images;
 
     /**
+     * @ORM\OneToMany(targetEntity=Video::class, cascade={"persist", "remove", refresh"}, mappedBy="trick")
+     */
+
+    /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="trick", orphanRemoval=true)
      */
     private Collection $messages;
@@ -57,15 +61,15 @@ class Trick
     private TrickGroup $trickGroup;
 
     public function __construct(
-        string $name,
-        string $description,
-        string $slug,
-        Image $coverImage
+        // string $name,
+        // string $description,
+        // string $slug,
+        // Image $coverImage
     ) {
-        $this->name = $name;
-        $this->description = $description;
-        $this->slug = $slug;
-        $this->coverImage = $coverImage;
+        // $this->name = $name;
+        // $this->description = $description;
+        // $this->slug = $slug;
+        // $this->coverImage = $coverImage;
         $this->images = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
@@ -119,18 +123,6 @@ class Trick
     public function setCoverImage(Image $coverImage): self
     {
         $this->coverImage = $coverImage;
-
-        return $this;
-    }
-
-    public function getImage(): ?Collection
-    {
-        return $this->image;
-    }
-
-    public function setImage(Collection $image): self
-    {
-        $this->image = $image;
 
         return $this;
     }

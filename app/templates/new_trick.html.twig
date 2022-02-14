@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    New Trick
+{% endblock %}
+
+{% block body %}
+    {{ form_start(createTrickForm)}}
+        {{form_label(createTrickForm.name)}}
+        {{form_widget(createTrickForm.name)}}
+
+        {{form_label(createTrickForm.description)}}
+        {{form_widget(createTrickForm.description)}}
+    {{ form_end(createTrickForm)}}
+{% endblock %}

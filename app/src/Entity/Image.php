@@ -38,13 +38,13 @@ class Image
     private Trick $trick;
 
     public function __construct(
-        string $name,
-        string $url,
-        string $description
+        // string $name,
+        // string $url,
+        // string $description
     ) {
-        $this->name = $name;
-        $this->url = $url;
-        $this->description = $description;
+        // $this->name = $name;
+        // $this->url = $url;
+        // $this->description = $description;
     }
 
     public function getId(): ?int

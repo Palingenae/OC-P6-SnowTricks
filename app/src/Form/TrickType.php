@@ -36,6 +36,17 @@ class TrickType extends AbstractType
                     ])
                 ]
             ])
+            ->add('trickGroup', EntityType::class, [
+                'class' => TrickGroup::class,
+                'label' => 'Catégorie du trick',
+                'attr' => [
+                    'class' => 'select'
+                ],
+                'label_attr' => [
+                    'class' => 'form__label'
+                ],
+                'choice_label' => 'name'
+            ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'attr' => [
@@ -52,35 +63,32 @@ class TrickType extends AbstractType
                     ])
                 ]
             ])
-            ->add('coverImage', ImageType::class, [])
-            // ->add('images', CollectionType::class, [
-            //     'entry_type' => ImageType::class,
-            //     'entry_options' => [
-            //         'label' => false
-            //     ],
-            //     'allow_add' => true,
-            //     'by_reference' => false
-            // ])
-            // ->add('video', TextType::class, [
-            //     'label' => 'Vidéo du trick',
-            //     'attr' => [
-            //         'class' => 'input'
-            //     ],
-            //     'label' => [
-            //         'class' => 'form__label'
-            //     ],
-            //     'constraints' => [
-            //         new NotBlank(),
-            //         new Length([
-            //             'min' => 4,
-            //             'max' => 255
-            //         ])
-            //     ]
-            // ])
-            // ->add('trickGroup', EntityType::class, [
-            //     'class' => TrickGroup::class,
-            //     'choice_label' => 'Catégorie du trick'
-            // ])
+            ->add('coverImage', ImageType::class, [
+                'label' => "Importer une image de couverture",
+                'label_attr' => [
+                    'class' => "label"
+                ]
+            ])
+            ->add('images', CollectionType::class, [
+                'label' => "Ajouter des images", 
+                'entry_type' => ImageType::class,
+                'entry_options' => [
+                    'label' => false
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false
+            ])
+            ->add('videos', CollectionType::class, [
+                'label' => 'Ajouter des vidéos',
+                'entry_type' => VideoType::class,
+                'entry_options' => [
+                    'label' => false
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false
+            ])
         ;
     }
 

@@ -2,22 +2,20 @@
 
 namespace App\Form;
 
-use App\Entity\Image;
-
+use App\Entity\Video;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ImageType extends AbstractType
+class VideoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => "Nom de l'image",
+                'label' => "Nom de la vidéo",
                 'attr' => [
                     'class' => 'input'
                 ],
@@ -25,19 +23,19 @@ class ImageType extends AbstractType
                     'class' => 'form__label',
                 ],
             ])
-            ->add('url', FileType::class, [
-                'label' => "Image à importer",
+            ->add('url', TextType::class, [
+                'label' => "Lien de la vidéo",
                 'attr' => [
                     'class' => 'input'
                 ],
                 'label_attr' => [
-                    'class' => 'form__label file-label',
+                    'class' => 'form__label',
                 ],
             ])
             ->add('description', TextareaType::class, [
-                'label' => "Description de l'image",
+                'label' => "Description de la vidéo",
                 'attr' => [
-                    'class' => 'textarea'
+                    'class' => 'input'
                 ],
                 'label_attr' => [
                     'class' => 'form__label',
@@ -49,7 +47,7 @@ class ImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Image::class,
+            'data_class' => Video::class,
         ]);
     }
 }

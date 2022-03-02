@@ -116,33 +116,33 @@ class AppFixtures extends Fixture
             $manager->persist($group);
 
             if (null !== $trickList) {
-                foreach ($trickList as $trick) {
+                foreach ($trickList as $trickName) {
                     $faker = Factory::create();
                     $slugger = new AsciiSlugger();
 
-                    $coverImage = new Image(
-                        'Cover Image',
-                        'https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
-                        'Cover Image'
-                    );
+                    $coverImage = new Image();
 
-                    $trick = new Trick(
-                        $trick,
-                        $faker->paragraph(3, 5),
-                        $slugger->slug($trick),
-                        $coverImage
-                    );
+                    $coverImage->setName('Cover Image');
+                    $coverImage->setUrl('https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+                    $coverImage->setDescription('Cover Image');
+
+                    $trick = new Trick();
+
+                    $trick->setName($trickName);
+                    $trick->setDescription($faker->paragraph(3, 5));
+                    $trick->setSlug($slugger->slug($trickName));
+                    $trick->setCoverImage($coverImage);
 
                     $manager->persist($coverImage);
                     $manager->flush();
 
                     $trick->setTrickGroup($group);
 
-                    $placeholderImage = new Image(
-                        'Placeholder Image',
-                        'https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
-                        'Placeholder Image'
-                    );
+                    $placeholderImage = new Image();
+
+                    $placeholderImage->setName('placeholder Image');
+                    $placeholderImage->setUrl('https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+                    $placeholderImage->setDescription('placeholder Image');
 
                     $manager->persist($placeholderImage);
                     $manager->persist($trick);

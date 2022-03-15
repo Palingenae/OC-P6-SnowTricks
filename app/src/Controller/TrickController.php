@@ -108,10 +108,50 @@ class TrickController extends AbstractController
                 }
 
                 $coverImage->setName($coverImageName);
+                $coverImage->setUrl($this->getParameter('images_url') . $coverImageName);
 
                 $this->manager->persist($coverImage);
                 $this->manager->flush();
             }
+            
+            $trickImagesCollection = $form->get('images');
+
+            foreach($trickImagesCollection as $trickImageTemp) {
+                /** @var UploadedFile $trickImageUrl */
+                $trickImageUrl = $trickImageTemp->get('url')->getData();
+                $trickImage = $trickImageTemp->getData();
+                
+                if($trickImageUrl) {
+                    $trickImageName = $trick->getSlug() . '-' . uniqid() . '-' . $trickImageUrl->guessExtension();
+
+                    try {
+                        $trickImageUrl->move(
+                            $this->getParameter('images_directory'),
+                            $trickImageName
+                        );
+                    } catch(FileException $fileException) {
+                        $fileException->getMessage();
+                    }
+
+                    $trickImage->setName($trickImageName);
+                    $trickImage->setUrl($this->getParameter('images_url') . $coverImageName);
+
+                    $this->manager->persist($trick);
+
+                    $trickImage->setTrick($trick);
+
+                    $this->manager->persist($trickImage);
+                    $this->manager->flush();
+
+                    $trick->addImage($trickImage);
+                }
+            }
+
+            // $trickVideosCollection = $form->get('videos');
+
+            // foreach($trickVideosCollection as $trickVideoTemp) {
+            //     $trickVideo = $form->getData()
+            // }
 
             // @TODO : Pour les galeries, si les Collections d'images ne sont pas vides, alors boucler sur celles-ci et boucler sur celles-ci. Idem pour les vidéos
 

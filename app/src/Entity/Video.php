@@ -33,7 +33,7 @@ class Video
     private string $description;
 
     /**
-     * ORM\ManyToOne(targetEntity=Trick::class, inversedBy="videos")
+     * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="videos")
      */
     private Trick $trick;
 

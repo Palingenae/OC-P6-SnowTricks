@@ -12,17 +12,30 @@
         <h2>Informations du trick</h2>
         <section class="trick__mediaCollection">
             <h3>Galerie</h3>
+            <h4>Images</h4>
             <div class="trick__mediasCollection__strip">
             {# Ici : mettre un if avec des images si il y en a #}
                 {% if trick.images != null %}
                     {% for image in trick.images %}
                         {% if image != trick.coverImage %}
-                            <img class="trick__media" alt={{ image.description }} src={{ image.url }} />
+                            <img class="trick__media" alt={{ image.description }} src={{ image.url }}>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
             </div>
             {# Ici : mettre un if avec des vidéos si il y en a #}
+            <div class="trick__mediasCollection__strip">
+            <h4>Vidéos</h4>
+            {# Ici : mettre un if avec des images si il y en a #}
+                {% if trick.videos != null %}
+                    {% for video in trick.videos %}
+                        <iframe class="trick__media" src={{ video.url }} allowfullscreen>
+                            {{ video.description }}
+                        </iframe>
+                        
+                    {% endfor %}
+                {% endif %}
+            </div>
         </section>
         <section class="trick__details">
             <h3>Description</h3>

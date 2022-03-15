@@ -15,6 +15,7 @@ parameters:
     database_host: '%env(resolve:DATABASE_HOST)%'
 
     images_directory: '%kernel.project_dir%/public/uploads/images'
+    images_url: '/uploads/images/'
 
 services:
     # default configuration for services in *this* file

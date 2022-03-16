@@ -147,16 +147,7 @@ class TrickController extends AbstractController
                 }
             }
 
-            // $trickVideosCollection = $form->get('videos');
-
-            // foreach($trickVideosCollection as $trickVideoTemp) {
-            //     $trickVideo = $form->getData()
-            // }
-
-            // @TODO : Pour les galeries, si les Collections d'images ne sont pas vides, alors boucler sur celles-ci et boucler sur celles-ci. Idem pour les vidéos
-
             $trick->setCoverImage($coverImage);
-            // $trick->setWriter($user);
             
             $this->manager->persist($trick);
             $this->manager->flush();

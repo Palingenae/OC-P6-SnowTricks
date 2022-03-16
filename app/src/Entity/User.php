@@ -59,6 +59,11 @@ class User implements UserInterface
     private Collection $messages;
 
     /**
+     * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="author", cascade={"persist", "remove"})
+     */
+    private Trick $trick;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -145,6 +150,18 @@ class User implements UserInterface
     public function setProfileImage(?Image $profileImage): self
     {
         $this->profileImage = $profileImage;
+
+        return $this;
+    }
+
+    public function getTrick(): ?Trick
+    {
+        return $this->trick;
+    }
+
+    public function setTrick(?Trick $trick): ?self
+    {
+        $this->trick = $trick;
 
         return $this;
     }

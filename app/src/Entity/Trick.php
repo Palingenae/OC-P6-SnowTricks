@@ -62,8 +62,8 @@ class Trick
      */
     private TrickGroup $trickGroup;
 
-    // @TODO: Add a writer for tricks
-    // private User $author;
+    /** @ORM\ManyToOne(targetEntity=User::class, inversedBy="trick") */
+    private User $author;
 
     public function __construct() {
         $this->images = new ArrayCollection();
@@ -223,5 +223,15 @@ class Trick
         $this->trickGroup = $trickGroup;
 
         return $this;
+    }
+
+    public function getAuthor(): User 
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(User $author): void
+    {
+        $this->author = $author;
     }
 }

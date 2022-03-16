@@ -17,6 +17,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class AppFixtures extends Fixture
 {
+    private const ADMIN = 'admin';
     private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
@@ -29,6 +30,8 @@ class AppFixtures extends Fixture
     public function loadUsers(ObjectManager $manager): void
     {
         $admin = new User();
+
+        $this->addReference(self::ADMIN, $admin);
 
         $admin->setFirstname('Jimmy');
         $admin->setLastname('Sweat');
@@ -77,6 +80,7 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+
     }
 
     public function loadTricks(ObjectManager $manager): void
@@ -132,6 +136,7 @@ class AppFixtures extends Fixture
                     $trick->setDescription($faker->paragraph(3, 5));
                     $trick->setSlug($slugger->slug($trickName));
                     $trick->setCoverImage($coverImage);
+                    $trick->setAuthor($this->getReference(self::ADMIN));
 
                     $manager->persist($coverImage);
                     $manager->flush();

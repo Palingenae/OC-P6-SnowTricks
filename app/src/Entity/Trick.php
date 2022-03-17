@@ -65,7 +65,7 @@ class Trick
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="createdTrick")
      */
-    private $author;
+    private User $author;
 
     public function __construct() {
         $this->images = new ArrayCollection();

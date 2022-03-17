@@ -75,8 +75,6 @@ class TrickController extends AbstractController
             ]);
         }
 
-        // dd($trick->getMessages());
-
         return $this->render('trick.html.twig', [
             'trick' => $trick,
             'messageWriter' => $messageWriter,
@@ -90,7 +88,7 @@ class TrickController extends AbstractController
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
 
-        // $user = $security->getUser();
+        $user = $security->getUser();
 
         if($form->isSubmitted() && $form->isValid()) {
             $trick = $form->getData();
@@ -145,7 +143,6 @@ class TrickController extends AbstractController
                     $trickImage->setTrick($trick);
 
                     $this->manager->persist($trickImage);
-                    $this->manager->flush();
 
                     $trick->addImage($trickImage);
                 }

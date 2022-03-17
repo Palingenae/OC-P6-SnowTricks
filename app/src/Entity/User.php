@@ -71,11 +71,11 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="author")
      */
-    private $createdTrick;
+    private Collection $createdTricks;
 
     public function __construct() {
         $this->messages = new ArrayCollection();
-        $this->createdTrick = new ArrayCollection();
+        $this->createdTricks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -243,9 +243,9 @@ class User implements UserInterface
     /**
      * @return Collection|Trick[]
      */
-    public function getCreatedTrick(): Collection
+    public function getCreatedTricks(): Collection
     {
-        return $this->createdTrick;
+        return $this->createdTricks;
     }
 
     public function addCreatedTrick(Trick $createdTrick): self
@@ -260,13 +260,6 @@ class User implements UserInterface
 
     public function removeCreatedTrick(Trick $createdTrick): self
     {
-        if ($this->createdTrick->removeElement($createdTrick)) {
-            // set the owning side to null (unless already changed)
-            if ($createdTrick->getAuthor() === $this) {
-                $createdTrick->setAuthor(null);
-            }
-        }
-
-        return $this;
+        return $this->createdTrick->removeElement($createdTrick);
     }
 }

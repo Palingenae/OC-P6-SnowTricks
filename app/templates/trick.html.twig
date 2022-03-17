@@ -9,13 +9,16 @@
         <p class="hero__display-text">{{ trick.name }}</p>
     </section>
     <main class="main">
-        <h2>Informations du trick</h2>
+        <div class="trick__meta">
+            <h2>Informations du trick</h2>
+            <p>Rédigé par : {{ trick.author.firstname }} {{ trick.author.lastname }}</p>
+        </div>
         <section class="trick__mediaCollection">
             <h3>Galerie</h3>
-            <h4>Images</h4>
-            <div class="trick__mediasCollection__strip">
             {# Ici : mettre un if avec des images si il y en a #}
                 {% if trick.images != null %}
+                <h4>Images</h4>
+                <div class="trick__mediasCollection__strip">
                     {% for image in trick.images %}
                         {% if image != trick.coverImage %}
                             <img class="trick__media" alt={{ image.description }} src={{ image.url }}>
@@ -24,10 +27,9 @@
                 {% endif %}
             </div>
             {# Ici : mettre un if avec des vidéos si il y en a #}
-            <div class="trick__mediasCollection__strip">
-            <h4>Vidéos</h4>
-            {# Ici : mettre un if avec des images si il y en a #}
                 {% if trick.videos != null %}
+                <div class="trick__mediasCollection__strip">
+                <h4>Vidéos</h4>
                     {% for video in trick.videos %}
                         <iframe class="trick__media" src={{ video.url }} allowfullscreen>
                             {{ video.description }}

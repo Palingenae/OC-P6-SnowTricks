@@ -54,14 +54,16 @@ class TrickController extends AbstractController
         ]);
 
         $message = new Message();
-        $form = $this->createForm(MessagingFormType::class, $message);
+        $form = $this->createForm(MessagingFormType::class);
         $form->handleRequest($request);
 
-        $user = $security->getUser();
+        $messageWriter = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $messageWriter = $security->getUser();
+
             $message = $form->getData();
-            $message->setWriter($user);
+            $message->setWriter($messageWriter);
             $message->setTrick($trick);
             $message->setCreatedAt(new DateTime('now'));
 
@@ -73,9 +75,11 @@ class TrickController extends AbstractController
             ]);
         }
 
+        // dd($trick->getMessages());
+
         return $this->render('trick.html.twig', [
             'trick' => $trick,
-            'user' => $user,
+            'messageWriter' => $messageWriter,
             'messageTrickForm' => $form->createView()
         ]);
     }

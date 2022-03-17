@@ -74,7 +74,8 @@ class AppFixtures extends Fixture
             $user->setRoles(['ROLE_USER']);
             $user->setIsVerified(true);
 
-            $this->userArray[] = $user;
+            $this->addReference('user' . $i, $user);
+            // $this->userArray[] = $user;
 
             $manager->persist($user);
         }
@@ -113,6 +114,8 @@ class AppFixtures extends Fixture
                 'Method Air',
             ],
         ];
+
+        $i = 0;
 
         foreach ($trickGroups as $trickGroup => $trickList) {
             $group = new TrickGroup($trickGroup);
@@ -158,7 +161,10 @@ class AppFixtures extends Fixture
 
                     $trick->addImage($placeholderImage);
 
-                    $this->trickArray[] = $trick;
+                    $this->addReference('trick' . $i, $trick);
+
+                    ++$i;
+                    // $this->trickArray[] = $trick;
                 }
             }
         }
@@ -173,18 +179,10 @@ class AppFixtures extends Fixture
             $faker = Factory::create();
 
             $designatedUser = rand(0, 19);
-            $user = $this->userArray[$designatedUser];
-
-            if (!$user instanceof User) {
-                throw new Exception('Cannot make an user');
-            }
+            $user = $this->getReference('user' . $designatedUser);
 
             $designatedTrick = rand(0, 11);
-            $trick = $this->trickArray[$designatedTrick];
-
-            if (!$trick instanceof Trick) {
-                throw new Exception('Cannot make a trick');
-            }
+            $trick = $this->getReference('trick' . $designatedTrick);
 
             $createdAt = new DateTime();
 

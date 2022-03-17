@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Entity\Trick;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -59,11 +59,6 @@ class User implements UserInterface
     private Collection $messages;
 
     /**
-     * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="author", cascade={"persist", "remove"})
-     */
-    private Trick $trick;
-
-    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -73,8 +68,14 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="author")
+     */
+    private $createdTrick;
+
     public function __construct() {
         $this->messages = new ArrayCollection();
+        $this->createdTrick = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,16 +155,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTrick(): ?Trick
+    public function getTrick(): Trick
     {
         return $this->trick;
     }
 
-    public function setTrick(?Trick $trick): ?self
+    public function setTrick(Trick $trick): void
     {
         $this->trick = $trick;
-
-        return $this;
     }
 
     /**
@@ -237,6 +236,36 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trick[]
+     */
+    public function getCreatedTrick(): Collection
+    {
+        return $this->createdTrick;
+    }
+
+    public function addCreatedTrick(Trick $createdTrick): self
+    {
+        if (!$this->createdTrick->contains($createdTrick)) {
+            $this->createdTrick[] = $createdTrick;
+            $createdTrick->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreatedTrick(Trick $createdTrick): self
+    {
+        if ($this->createdTrick->removeElement($createdTrick)) {
+            // set the owning side to null (unless already changed)
+            if ($createdTrick->getAuthor() === $this) {
+                $createdTrick->setAuthor(null);
+            }
+        }
 
         return $this;
     }

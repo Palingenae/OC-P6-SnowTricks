@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\TrickRepository;
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -62,8 +62,10 @@ class Trick
      */
     private TrickGroup $trickGroup;
 
-    /** @ORM\ManyToOne(targetEntity=User::class, inversedBy="trick") */
-    private User $author;
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="createdTrick")
+     */
+    private $author;
 
     public function __construct() {
         $this->images = new ArrayCollection();

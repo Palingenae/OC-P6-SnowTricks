@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Trick;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -71,11 +72,12 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="author")
      */
-    private Collection $createdTrick;
+    private Collection $tricks;
+
 
     public function __construct() {
         $this->messages = new ArrayCollection();
-        $this->createdTrick = new ArrayCollection();
+        $this->tricks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -243,23 +245,25 @@ class User implements UserInterface
     /**
      * @return Collection|Trick[]
      */
-    public function getCreatedTrick(): Collection
+    public function getTricks(): Collection
     {
-        return $this->createdTrick;
+        return $this->tricks;
     }
 
-    public function addCreatedTrick(Trick $createdTrick): self
+    public function addTrick(Trick $trick): self
     {
-        if (!$this->createdTrick->contains($createdTrick)) {
-            $this->createdTrick[] = $createdTrick;
-            $createdTrick->setAuthor($this);
+        if (!$this->tricks->contains($trick)) {
+            $this->tricks[] = $trick;
+            $trick->setAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeCreatedTrick(Trick $createdTrick): void
+    public function removeTrick(Trick $trick): self
     {
-        $this->createdTrick->removeElement($createdTrick);
+        $this->tricks->removeElement($trick);
+
+        return $this;
     }
 }

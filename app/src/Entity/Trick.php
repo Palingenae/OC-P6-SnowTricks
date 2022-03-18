@@ -63,7 +63,8 @@ class Trick
     private TrickGroup $trickGroup;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="createdTrick")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tricks")
+     * @ORM\JoinColumn(nullable=false)
      */
     private User $author;
 

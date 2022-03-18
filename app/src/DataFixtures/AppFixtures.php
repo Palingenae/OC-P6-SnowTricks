@@ -164,7 +164,6 @@ class AppFixtures extends Fixture
                     $this->addReference('trick' . $i, $trick);
 
                     ++$i;
-                    // $this->trickArray[] = $trick;
                 }
             }
         }

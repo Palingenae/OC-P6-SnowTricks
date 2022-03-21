@@ -2,6 +2,10 @@ index:
    path: /
    controller: App\Controller\TrickController::index
 
+new_trick:
+   path: /tricks/new
+   controller: App\Controller\TrickController::createTrick
+
 tricks:
    path: /tricks
    controller: App\Controller\TrickController::getAllTricks
@@ -9,6 +13,10 @@ tricks:
 display_trick:
    path: /tricks/{slug}
    controller: App\Controller\TrickController::getOneTrick
+
+delete_trick:
+   path: /tricks/{slug}/delete
+   controller: App\Controller\TrickController::deleteTrick
 
 login:
    path: /login

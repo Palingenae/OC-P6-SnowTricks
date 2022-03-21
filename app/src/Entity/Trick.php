@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\TrickRepository;
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * @ORM\Entity(repositoryClass=TrickRepository::class)
@@ -46,6 +47,11 @@ class Trick
     private Collection $images;
 
     /**
+     * @ORM\OneToMany(targetEntity=Video::class, cascade={"persist", "remove", "refresh"}, mappedBy="trick")
+     */
+    private Collection $videos;
+
+    /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="trick", orphanRemoval=true)
      */
     private Collection $messages;
@@ -56,17 +62,15 @@ class Trick
      */
     private TrickGroup $trickGroup;
 
-    public function __construct(
-        string $name,
-        string $description,
-        string $slug,
-        Image $coverImage
-    ) {
-        $this->name = $name;
-        $this->description = $description;
-        $this->slug = $slug;
-        $this->coverImage = $coverImage;
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="tricks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private User $author;
+
+    public function __construct() {
         $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
 
@@ -83,6 +87,9 @@ class Trick
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        $slugger = new AsciiSlugger();
+        $this->slug = $slugger->slug($name);
 
         return $this;
     }
@@ -123,26 +130,28 @@ class Trick
         return $this;
     }
 
-    public function getImage(): ?Collection
+    public function getVideos(): ?Collection
     {
-        return $this->image;
+        return $this->videos;
     }
 
-    public function setImage(Collection $image): self
+    public function addVideo(Video $video): self
     {
-        $this->image = $image;
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setTrick($this);
+        }
 
         return $this;
     }
 
-    public function getVideo(): ?Collection
+    public function removeVideo(Video $video): self
     {
-        return $this->video;
-    }
-
-    public function setVideo(Collection $video): self
-    {
-        $this->video = $video;
+        if ($this->videos->removeElement($video)) {
+            if ($video->getTrick() === $this) {
+                $video->setTrick(null);
+            }
+        }
 
         return $this;
     }
@@ -217,5 +226,15 @@ class Trick
         $this->trickGroup = $trickGroup;
 
         return $this;
+    }
+
+    public function getAuthor(): User 
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(User $author): void
+    {
+        $this->author = $author;
     }
 }

@@ -17,6 +17,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class AppFixtures extends Fixture
 {
+    private const ADMIN = 'admin';
     private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
@@ -29,6 +30,8 @@ class AppFixtures extends Fixture
     public function loadUsers(ObjectManager $manager): void
     {
         $admin = new User();
+
+        $this->addReference(self::ADMIN, $admin);
 
         $admin->setFirstname('Jimmy');
         $admin->setLastname('Sweat');
@@ -71,12 +74,14 @@ class AppFixtures extends Fixture
             $user->setRoles(['ROLE_USER']);
             $user->setIsVerified(true);
 
-            $this->userArray[] = $user;
+            $this->addReference('user' . $i, $user);
+            // $this->userArray[] = $user;
 
             $manager->persist($user);
         }
 
         $manager->flush();
+
     }
 
     public function loadTricks(ObjectManager $manager): void
@@ -110,39 +115,42 @@ class AppFixtures extends Fixture
             ],
         ];
 
+        $i = 0;
+
         foreach ($trickGroups as $trickGroup => $trickList) {
             $group = new TrickGroup($trickGroup);
 
             $manager->persist($group);
 
             if (null !== $trickList) {
-                foreach ($trickList as $trick) {
+                foreach ($trickList as $trickName) {
                     $faker = Factory::create();
                     $slugger = new AsciiSlugger();
 
-                    $coverImage = new Image(
-                        'Cover Image',
-                        'https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
-                        'Cover Image'
-                    );
+                    $coverImage = new Image();
 
-                    $trick = new Trick(
-                        $trick,
-                        $faker->paragraph(3, 5),
-                        $slugger->slug($trick),
-                        $coverImage
-                    );
+                    $coverImage->setName('Cover Image');
+                    $coverImage->setUrl('https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+                    $coverImage->setDescription('Cover Image');
+
+                    $trick = new Trick();
+
+                    $trick->setName($trickName);
+                    $trick->setDescription($faker->paragraph(3, 5));
+                    $trick->setSlug($slugger->slug($trickName));
+                    $trick->setCoverImage($coverImage);
+                    $trick->setAuthor($this->getReference(self::ADMIN));
 
                     $manager->persist($coverImage);
                     $manager->flush();
 
                     $trick->setTrickGroup($group);
 
-                    $placeholderImage = new Image(
-                        'Placeholder Image',
-                        'https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
-                        'Placeholder Image'
-                    );
+                    $placeholderImage = new Image();
+
+                    $placeholderImage->setName('placeholder Image');
+                    $placeholderImage->setUrl('https://images.unsplash.com/photo-1478700485868-972b69dc3fc4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80');
+                    $placeholderImage->setDescription('placeholder Image');
 
                     $manager->persist($placeholderImage);
                     $manager->persist($trick);
@@ -153,7 +161,9 @@ class AppFixtures extends Fixture
 
                     $trick->addImage($placeholderImage);
 
-                    $this->trickArray[] = $trick;
+                    $this->addReference('trick' . $i, $trick);
+
+                    ++$i;
                 }
             }
         }
@@ -168,18 +178,10 @@ class AppFixtures extends Fixture
             $faker = Factory::create();
 
             $designatedUser = rand(0, 19);
-            $user = $this->userArray[$designatedUser];
-
-            if (!$user instanceof User) {
-                throw new Exception('Cannot make an user');
-            }
+            $user = $this->getReference('user' . $designatedUser);
 
             $designatedTrick = rand(0, 11);
-            $trick = $this->trickArray[$designatedTrick];
-
-            if (!$trick instanceof Trick) {
-                throw new Exception('Cannot make a trick');
-            }
+            $trick = $this->getReference('trick' . $designatedTrick);
 
             $createdAt = new DateTime();
 

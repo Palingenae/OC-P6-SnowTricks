@@ -31,6 +31,10 @@
     margin-bottom: $spacing-small;
   }
 
+  &__meta {
+    margin-bottom: $spacing-large;
+  }
+
   &__list {
     @extend .columns;
     display: flex;
@@ -44,6 +48,7 @@
     max-width: 20rem;
     aspect-ratio: 16/9;
     margin-right: $spacing-small;
+    margin-bottom: $spacing-large;
 
     &Collection {
       margin-bottom: $spacing-large;

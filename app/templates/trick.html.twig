@@ -10,6 +10,9 @@
     </section>
     <main class="main">
         <div class="trick__meta">
+            {% if trick.author == app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href={{ path('delete_trick', {slug: trick.slug})}} class="button is-danger">Supprimer</a>
+            {% endif %}
             <h2>Informations du trick</h2>
             <p>Rédigé par : {{ trick.author.firstname }} {{ trick.author.lastname }}</p>
         </div>

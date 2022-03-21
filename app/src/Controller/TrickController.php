@@ -149,6 +149,8 @@ class TrickController extends AbstractController
             }
 
             $trick->setCoverImage($coverImage);
+
+            $trick->setAuthor($user);
             
             $this->manager->persist($trick);
             $this->manager->flush();
@@ -162,5 +164,17 @@ class TrickController extends AbstractController
             'trick' => $trick,
             'createTrickForm' => $form->createView(),
         ]);
+    }
+
+    public function deleteTrick(string $slug, Request $request, EntityManagerInterface $manager): Response
+    {
+        $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
+
+        $this->denyAccessUnlessGranted('delete', $trick);
+
+        $manager->remove($trick);
+        $manager->flush();
+
+        return $this->redirectToRoute('index');
     }
 }

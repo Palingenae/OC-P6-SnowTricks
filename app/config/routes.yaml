@@ -14,6 +14,10 @@ display_trick:
    path: /tricks/{slug}
    controller: App\Controller\TrickController::getOneTrick
 
+delete_trick:
+   path: /tricks/{slug}/delete
+   controller: App\Controller\TrickController::deleteTrick
+
 login:
    path: /login
    controller: App\Controller\AuthController::login

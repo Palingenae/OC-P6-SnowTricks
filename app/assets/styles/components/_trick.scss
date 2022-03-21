@@ -19,7 +19,7 @@
   &__details {
     padding-bottom: $spacing-large;
     border-bottom: 1px solid $grey-600;
-    margin-bottom: $spacing-xlarge;
+    margin-bottom: $spacing-large;
   }
 
   &__group {
@@ -29,6 +29,10 @@
   &__coverContainer {
     object-fit: cover;
     margin-bottom: $spacing-small;
+  }
+
+  &__meta {
+    margin-bottom: $spacing-large;
   }
 
   &__list {
@@ -44,6 +48,7 @@
     max-width: 20rem;
     aspect-ratio: 16/9;
     margin-right: $spacing-small;
+    margin-bottom: $spacing-large;
 
     &Collection {
       margin-bottom: $spacing-large;

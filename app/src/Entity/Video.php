@@ -32,6 +32,11 @@ class Video
      */
     private string $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Trick::class, inversedBy="videos")
+     */
+    private Trick $trick;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Video
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTrick(): ?Trick
+    {
+        return $this->trick;
+    }
+
+    public function setTrick(?Trick $trick): self
+    {
+        $this->trick = $trick;
 
         return $this;
     }

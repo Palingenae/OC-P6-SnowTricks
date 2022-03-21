@@ -1,6 +1,9 @@
 .form {
-    max-width: 30rem;
     padding: $spacing-small 0;
+    &--message {
+        @extend .form;
+        margin-bottom: $spacing-large;
+    }
     &__field {
         margin-bottom: $spacing-medium;
     }

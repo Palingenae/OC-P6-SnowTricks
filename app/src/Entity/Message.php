@@ -40,18 +40,6 @@ class Message
      */
     private DateTime $createdAt;
 
-    public function __construct(
-        User $writer,
-        Trick $trick,
-        string $content,
-        DateTime $createdAt
-    ) {
-        $this->writer = $writer;
-        $this->trick = $trick;
-        $this->content = $content;
-        $this->createdAt = $createdAt;
-    }
-
     public function getId(): ?int
     {
         return $this->id;

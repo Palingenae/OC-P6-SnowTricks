@@ -33,6 +33,7 @@ class ImageType extends AbstractType
                 'label_attr' => [
                     'class' => 'form__label file-label',
                 ],
+                'data_class' => null
             ])
             ->add('description', TextareaType::class, [
                 'label' => "Description de l'image",

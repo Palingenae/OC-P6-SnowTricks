@@ -28,8 +28,9 @@ class TrickVoter extends Voter
 
         switch ($attribute) {
             case self::UPDATE:
-                // logic to determine if the user can EDIT
-                // return true or false
+                if($subject->getAuthor() === $user || $user->getRoles() == ['ROLES_ADMIN']) {
+                    return true;
+                }
                 break;
             case self::DELETION:
                 if($subject->getAuthor() == $user) {

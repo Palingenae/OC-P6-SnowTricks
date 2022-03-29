@@ -67,7 +67,8 @@ class TrickType extends AbstractType
                 'label' => "Importer une image de couverture",
                 'label_attr' => [
                     'class' => "label"
-                ]
+                ],
+                'data_class' => 'App\Entity\Image'
             ])
             ->add('images', CollectionType::class, [
                 'label' => "Ajouter des images", 

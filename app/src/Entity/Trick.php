@@ -36,8 +36,8 @@ class Trick
     private string $slug;
 
     /**
-     * @ORM\OneToOne(targetEntity=Image::class, cascade={"persist", "remove", "refresh", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity=Image::class, cascade={"persist", "remove", "refresh"})
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Image $coverImage;
 
@@ -176,12 +176,7 @@ class Trick
 
     public function removeImage(Image $image): self
     {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getTrick() === $this) {
-                $image->setTrick(null);
-            }
-        }
+        $this->images->removeElement($image);
 
         return $this;
     }

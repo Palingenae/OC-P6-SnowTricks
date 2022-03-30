@@ -260,7 +260,6 @@ class TrickController extends AbstractController
         $this->denyAccessUnlessGranted('delete', $trick);
 
         $manager->remove($trick);
-        $manager->remove($trick->getImages());
         $manager->flush();
 
         return $this->redirectToRoute('index');

@@ -166,6 +166,93 @@ class TrickController extends AbstractController
         ]);
     }
 
+    public function updateTrick(string $slug, Request $request, Security $security, EntityManagerInterface $manager): Response
+    {
+        $trick = $this->trickRepository->findOneBy(['slug' => $slug]);
+
+        $this->denyAccessUnlessGranted('update', $trick);
+
+        $form = $this->createForm(TrickType::class, $trick);
+        $form->handleRequest($request);
+
+        $user = $security->getUser();
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $trick = $form->getData();
+
+            /** @var UploadedFile $coverImage */
+            $coverImageUrl = $form->get('coverImage')->get('url')->getData();
+            $coverImage = $form->get('coverImage')->getData();
+
+            if($coverImageUrl) {
+                $coverImageName = $trick->getSlug() . '-' . uniqid() . '.' . $coverImageUrl->guessExtension();
+
+                try {
+                    $coverImageUrl->move(
+                        $this->getParameter('images_directory'),
+                        $coverImageName
+                    );
+                } catch (FileException $fileException) {
+                    $fileException->getMessage();
+                }
+
+                $coverImage->setName($coverImageName);
+                $coverImage->setUrl($this->getParameter('images_url') . $coverImageName);
+
+                $this->manager->persist($coverImage);
+                $this->manager->flush();
+            }
+            
+            $trickImagesCollection = $form->get('images');
+
+            foreach($trickImagesCollection as $trickImageTemp) {
+                /** @var UploadedFile $trickImageUrl */
+                $trickImageUrl = $trickImageTemp->get('url')->getData();
+                $trickImage = $trickImageTemp->getData();
+                
+                if($trickImageUrl) {
+                    $trickImageName = $trick->getSlug() . '-' . uniqid() . '-' . $trickImageUrl->guessExtension();
+
+                    try {
+                        $trickImageUrl->move(
+                            $this->getParameter('images_directory'),
+                            $trickImageName
+                        );
+                    } catch(FileException $fileException) {
+                        $fileException->getMessage();
+                    }
+
+                    $trickImage->setName($trickImageName);
+                    $trickImage->setUrl($this->getParameter('images_url') . $coverImageName);
+
+                    $this->manager->persist($trick);
+
+                    $trickImage->setTrick($trick);
+
+                    $this->manager->persist($trickImage);
+
+                    $trick->addImage($trickImage);
+                }
+            }
+
+            $trick->setCoverImage($coverImage);
+
+            $trick->setAuthor($user);
+            
+            $this->manager->persist($trick);
+            $this->manager->flush();
+
+            return $this->redirectToRoute('display_trick', [
+                'slug' => $trick->getSlug()
+            ]);
+        }
+
+        return $this->render('update_trick.twig', [
+            'trick' => $trick,
+            'createTrickForm' => $form->createView()
+        ]);
+    }
+
     public function deleteTrick(string $slug, Request $request, EntityManagerInterface $manager): Response
     {
         $trick = $this->trickRepository->findOneBy(['slug' => $slug]);

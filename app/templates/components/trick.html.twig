@@ -6,4 +6,12 @@
         <a href={{ path('display_trick', {slug: trick.slug}) }}>{{ trick.name }}</a>
     </h4>
     <p>{{ trick.trickgroup.name }}</p>
+    <p>
+        {% if is_granted ('ROLE_ADMIN') or user == trick.author %}
+            <a href={{ path('update_trick', {slug: trick.slug})}} class="button is-link is-small is-light">
+                <i class="ri-edit-line"></i> 
+            </a>
+            <a href={{ path('delete_trick', {slug: trick.slug})}} class="button is-danger is-small is-light"><i class="ri-delete-bin-line"></i> </a>
+        {% endif %}
+    </p>
 </div>

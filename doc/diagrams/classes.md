@@ -15,20 +15,27 @@
             -string $description
             -string $slug
             -Image $coverImage
-            -Collection<Image> $image
-            -Collection<Video> $video
+            -TrickGroup $trickGroup
+            -User $author
+            -Collection<Image> $images
+            -Collection<Video> $videos
+            -Collection<Messages> $messages
         }
         class User {
             -string $firstname
             -string $lastname
             -string $username
-            -string $emailAddress
+            -string $email
             -string $password
-            -Image $profileImage
+            -array $roles
+            -bool $isVerified
             -string $token
+            -Image $profileImage
+            -Collection<Message> $messages
+            -Collection<Trick> $tricks
         }
         class Message {
-            -User $user
+            -User $writer
             -Trick $trick
             -string $content
             -DateTime $createdAt
@@ -41,9 +48,12 @@
             -string $fileName
             -string $filePath
             -string $description
+            -Trick $trick
         }
         class Video {
             -string $name
             -string $url
+            -string $description
+            -Trick $trick
         }
 ```

@@ -15,5 +15,125 @@
 
 h1 {
   font-family: $font-display;
-  font-size: ms(9);
+  margin-bottom: $spacing-medium;
+  @include from($screen-size-xl) {
+    font-size: ms(7);
+  }
+  @include until($screen-size-xl) {
+    font-size: ms(6);
+  }
+  @include until($screen-size-lg) {
+    font-size: ms(6);
+  }
+  @include until($screen-size-md) {
+    font-size: ms(5);
+  }
+  @include until($screen-size-sm) {
+    font-size: ms(4);
+  }
+}
+
+h2 {
+  font-family: $font-text;
+  font-weight: 500;
+  @include from($screen-size-xl) {
+    font-size: ms(4);
+    margin-bottom: $spacing-large;
+  }
+  @include until($screen-size-xl) {
+    font-size: ms(4);
+    margin-bottom: $spacing-large;
+  }
+  @include until($screen-size-lg) {
+    font-size: ms(4);
+    margin-bottom: $spacing-medium;
+  }
+  @include until($screen-size-md) {
+    font-size: ms(3);
+    margin-bottom: $spacing-medium;
+  }
+  @include until($screen-size-sm) {
+    font-size: ms(3);
+    margin-bottom: $spacing-medium;
+  }
+}
+
+h3 {
+  font-family: $font-text;
+  font-size: ms(3);
+  font-variation-settings: 'wght' 600;
+  margin-bottom: $spacing-medium;
+  // @include small-display {
+  //   font-size: ms(2);
+  // }
+}
+
+h4 {
+  font-family: $font-text;
+  font-size: ms(2);
+  // margin-bottom: $spacing-medium;
+  // @include small-display {
+  //   font-size: ms(1);
+  // }
+}
+
+p {
+  font: {
+    family: $font-text;
+    weight: 400;
+    size: ms(1);
+    variation-settings: 'wght' 350;
+  }
+  margin-bottom: $spacing-small;
+}
+
+.paragraph {
+  @extend p;
+
+  &--lead {
+    font-size: ms(1);
+    font-variation-settings: 'wght' 600;
+    font-style: italic;
+  }
+
+  &--jumbo {
+    color: $grey-800;
+    font-size: ms(2);
+    font-weight: 300;
+    max-width: $text-width;
+    margin-bottom: $spacing-medium;
+  }
+}
+
+.user-interactions {
+  @extend p;
+  font-size: ms(1);
+}
+
+.section-title {
+  @extend p;
+  font-size: ms(2);
+  font-variation-settings: 'wght' 500;
+}
+
+/* ----- Giving all labor elements the same line-height and letter spacing no matter the context ----- */
+
+a,
+b,
+p,
+em,
+strong,
+span,
+ul,
+li {
+  color: $grey-900;
+  font-family: $font-text;
+  line-height: $spacing-text-line-height;
+  letter-spacing: $spacing-letter-spacing-text;
+}
+
+.label {
+  display: inline;
+  font-size: inherit;
+  font-weight: 700;
 }

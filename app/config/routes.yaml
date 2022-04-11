@@ -1,3 +1,43 @@
 index:
    path: /
-   controller: App\Controller\DefaultController::index
+   controller: App\Controller\TrickController::index
+
+new_trick:
+   path: /tricks/new
+   controller: App\Controller\TrickController::createTrick
+
+tricks:
+   path: /tricks
+   controller: App\Controller\TrickController::getAllTricks
+
+display_trick:
+   path: /tricks/{slug}
+   controller: App\Controller\TrickController::getOneTrick
+
+update_trick:
+   path: /tricks/{slug}/update
+   controller: App\Controller\TrickController::updateTrick
+
+delete_trick:
+   path: /tricks/{slug}/delete
+   controller: App\Controller\TrickController::deleteTrick
+
+login:
+   path: /login
+   controller: App\Controller\AuthController::login
+
+logout:
+   path: /logout
+   methods: GET
+
+register:
+   path: /register
+   controller: App\Controller\RegistrationController::register
+
+reset_password:
+   path: /reset-password
+   controller: App\Controller\RegistrationController::resetPassword
+
+app_verify_email:
+   path: /verify/email
+   controller: App\Controller\RegistrationController::verifyUserEmail

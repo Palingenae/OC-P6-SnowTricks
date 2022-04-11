@@ -8,11 +8,14 @@ parameters:
     app_secret: '%env(resolve:APP_SECRET)%'
 
     doctrine.dbal.url: '%env(resolve:DATABASE_URL)%'
-    database_user: '%env(resolve:DATABASE_USER)%'
-    database_password: '%env(resolve:DATABASE_PASSWORD)%'
-    database_name: '%env(resolve:DATABASE_NAME)%'
-    database_root_password: '%env(resolve:DATABASE_ROOT_PASSWORD)%'
+    database_user: '%env(resolve:MYSQL_USER)%'
+    database_password: '%env(resolve:MYSQL_PASSWORD)%'
+    database_name: '%env(resolve:MYSQL_DATABASE)%'
+    database_root_password: '%env(resolve:MYSQL_ROOT_PASSWORD)%'
     database_host: '%env(resolve:DATABASE_HOST)%'
+
+    images_directory: '%kernel.project_dir%/public/uploads/images'
+    images_url: '/uploads/images/'
 
 services:
     # default configuration for services in *this* file

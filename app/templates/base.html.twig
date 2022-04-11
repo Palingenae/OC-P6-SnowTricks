@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Snowtricks{% block title %}{% endblock %}</title>
+        <meta lang="fr">
+        <meta name="viewport" content="width=device-width">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -14,6 +17,8 @@
         {% endblock %}
     </head>
     <body>
+        {% include "partials/navigation.html.twig" %}
         {% block body %}{% endblock %}
+        {% include "partials/footer.html.twig" %}
     </body>
 </html>

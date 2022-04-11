@@ -1,0 +1,22 @@
+.message {
+  @extend .column;
+  @extend .is-10;
+  @extend .is-offset-1;
+  background-color: $grey-200;
+  padding: $spacing-medium;
+
+  &Container {
+    @extend .columns;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  &__created {
+    font-size: ms(0);
+    color: $grey-600;
+  }
+
+  &__writer {
+    font-weight: 700;
+  }
+}

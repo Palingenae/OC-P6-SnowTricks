@@ -1,0 +1,22 @@
+.form {
+    padding: $spacing-small 0;
+    &--message {
+        @extend .form;
+        margin-bottom: $spacing-large;
+    }
+    &__field {
+        margin-bottom: $spacing-medium;
+    }
+    &__label {
+        @extend .label;
+        font-family: $font-text;
+        font-size: ms(1);
+        display: inline-block;
+        margin-bottom: $spacing-xsmall;
+    }
+    button[type="submit"] {
+        font-family: $font-text;
+        font-size: ms(0);
+        font-variation-settings: 'wght' 650;
+    }
+}

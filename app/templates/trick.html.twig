@@ -1,0 +1,83 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    ─ {{ trick.name }}
+{% endblock %}
+
+{% block body %}
+    <section class="hero--trick">
+        <p class="hero__display-text">{{ trick.name }}</p>
+    </section>
+    <main class="main">
+        {% for message in app.flashes('is-success') %}
+        <div class="notification is-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+        <div class="trick__meta">
+            <h2>Informations du trick</h2>
+            {% if trick.author == app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+            <p>Rédigé par vous</p>
+            <div class="trick__actions">
+                <a href={{ path('update_trick', {slug: trick.slug})}} class="button is-link">Modifier</a>
+                <a href={{ path('delete_trick', {slug: trick.slug})}} class="button is-danger">Supprimer</a>
+            </div>
+            {% else %}
+            <p>Rédigé par {{ trick.author.firstname }} {{ trick.author.lastname }}</p>
+            {% endif %}
+        </div>
+        <section class="trick__mediaCollection">
+            <h3>Galerie</h3>
+            {# Ici : mettre un if avec des images si il y en a #}
+                {% if trick.images != null %}
+                <h4>Images</h4>
+                <div class="trick__mediasCollection__strip">
+                    {% for image in trick.images %}
+                        {% if image != trick.coverImage %}
+                            <img class="trick__media" alt={{ image.description }} src={{ image.url }}>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {# Ici : mettre un if avec des vidéos si il y en a #}
+                {% if trick.videos != null %}
+                <div class="trick__mediasCollection__strip">
+                <h4>Vidéos</h4>
+                    {% for video in trick.videos %}
+                        <iframe class="trick__media" src={{ video.url }} allowfullscreen>
+                            {{ video.description }}
+                        </iframe>
+                        
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </section>
+        <section class="trick__details">
+            <h3>Description</h3>
+            <p class="trick__group">
+                <span class="label">Groupe:</span> {{ trick.trickGroup.name }}
+            </p>
+            <p class="trick__description">{{ trick.description }}</p>
+        </section>
+        <section class="messageContainer">
+        <h2>Messages</h2>
+        <div class="form form--message">
+            {{ form_start(messageTrickForm) }}
+                <div class="form__field">
+                    <h3>{{form_label(messageTrickForm.content)}}</h3>
+                    {{form_widget(messageTrickForm.content)}}
+                </div>
+                <button type="submit" class="button is-link">Valider le message</button>
+            {{ form_end(messageTrickForm) }}
+        </div>
+        <h3>Messages publiés</h3>
+        {% for message in trick.messages %}
+            <div class="message">
+                <p class="message__writer">{{ message.writer.firstname }} {{ message.writer.lastname }}</p>
+                <p class="message__created">{{ message.createdAt | format_datetime('short') }}</p>
+                <p class="message__content">{{ message.content }}</p>
+            </div>
+        {% endfor %}
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,20 @@
+<nav class="navigation" role="navigation" aria-label="main navigation">
+    <div class="navigation__brand">
+        <a href="/" class="navigation__item">Snowtricks</a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="navigation__menu">
+        <a href={{ path('tricks') }} class="navigation__item">Tous les tricks</a>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <a href={{ path('new_trick') }} class="navigation__item">Ajouter un trick</a>
+            <a href={{ path('logout') }} class="navigation__item">Déconnexion</a>
+        {% else %}
+            <a href={{ path('login') }} class="navigation__item">Connexion</a>
+            <a href={{ path('register') }} class="navigation__item">Inscription</a>
+        {% endif %}
+    </div>
+</nav>

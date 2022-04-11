@@ -1,0 +1,104 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    New Trick
+{% endblock %}
+
+
+{% block body %}
+<section class="section">
+<h2>Ajouter un nouveau trick</h2>
+    <section class="form">
+    {{ form_start(createTrickForm)}}
+    <div class="form__field">
+        {{form_label(createTrickForm.name)}}
+        {{form_widget(createTrickForm.name)}}
+    </div>
+
+
+    <div class="form__field">
+        {{form_label(createTrickForm.trickGroup)}}
+        {{form_widget(createTrickForm.trickGroup)}}
+    </div>
+
+    <div class="form__field">
+        {{form_label(createTrickForm.description)}}
+        {{form_widget(createTrickForm.description)}}
+    </div>
+
+    <div class="form__field">
+        {{form_label(createTrickForm.coverImage)}}
+        {{form_widget(createTrickForm.coverImage)}}
+    </div>
+
+    <div class="form__field">
+        {{form_label(createTrickForm.images)}}
+        <button type="button" class="add_item_link button is-primary" data-collection-holder-class="images">Ajouter</button>
+        
+        <div 
+            class="form__image-collection images" 
+            data-index="{{ createTrickForm.images|length > 0 ? createTrickForm.images|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(createTrickForm.images.vars.prototype)|e('html_attr') }}">
+
+            {{form_widget(createTrickForm.images)}}
+        </div>
+    </div>
+
+    <div class="form__field">
+        {{form_label(createTrickForm.videos)}}
+        <button type="button" class="add_item_link button is-primary" data-collection-holder-class="videos">Ajouter</button>
+        
+        <div
+            class="form__video-collection videos" 
+            data-index="{{ createTrickForm.videos|length > 0 ? createTrickForm.videos|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(createTrickForm.videos.vars.prototype)|e('html_attr') }}">
+
+            {{form_widget(createTrickForm.videos)}}
+        </div>
+    </div>
+
+
+        <button type="submit" class="button is-link">Enregistrer</button>
+        {{ form_end(createTrickForm)}}
+        </section>
+    </section>
+
+    <script type="text/javascript">
+        const addImageFormDeleteLink = (item) => {
+            const removeFormButton = document.createElement('button');
+
+            item.append(removeFormButton);
+            removeFormButton.setAttribute('class', 'button is-danger');
+            removeFormButton.innerText = "Retirer l'élément";
+
+            removeFormButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                item.remove();
+            });
+        }
+
+        const addFormToCollection = (element) => {
+            const collectionHolder = document.querySelector('.' + element.currentTarget.dataset.collectionHolderClass);
+
+            const item = document.createElement('div');
+
+            item.innerHTML = collectionHolder
+                .dataset
+                .prototype
+                .replace(
+                    /__name__/g,
+                    collectionHolder.dataset.index
+                );
+
+            collectionHolder.appendChild(item);
+
+            collectionHolder.dataset.index++;
+
+            addImageFormDeleteLink(item);
+        };
+
+        document
+            .querySelectorAll('.add_item_link')
+            .forEach(button => {
+                button.addEventListener("click", addFormToCollection)
+            });
+    </script>
+{% endblock %}

@@ -6,6 +6,11 @@
 
 {% block body %}
     <main class="main--centered">
+        {% for message in app.flashes('is-success') %}
+        <div class="notification is-success">
+            {{ message }}
+        </div>
+        {% endfor %}
         <section class="tricks__section">
             <h2>Tous les tricks</h2>
             <section class="trick__list">

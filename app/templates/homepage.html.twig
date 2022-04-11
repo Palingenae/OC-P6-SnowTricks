@@ -9,6 +9,11 @@
         <p class="hero__display-text">Snowtricks</p>
     </section>
     <main class="main--centered">
+        {% for message in app.flashes('is-success') %}
+        <div class="notification is-success">
+            {{ message }}
+        </div>
+        {% endfor %}
         <section class="tricks__section">
             <h3>Derniers tricks ajoutés</h3>
             <section class="trick__list">

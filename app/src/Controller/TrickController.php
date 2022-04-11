@@ -155,6 +155,11 @@ class TrickController extends AbstractController
             $this->manager->persist($trick);
             $this->manager->flush();
 
+            $this->addFlash(
+                'is-success',
+                'Le trick a bien été sauvegardé'
+            );
+
             return $this->redirectToRoute('display_trick', [
                 'slug' => $trick->getSlug()
             ]);
@@ -242,6 +247,11 @@ class TrickController extends AbstractController
             $this->manager->persist($trick);
             $this->manager->flush();
 
+            $this->addFlash(
+                'is-success',
+                'Les changements ont bien été sauvegardés'
+            );
+
             return $this->redirectToRoute('display_trick', [
                 'slug' => $trick->getSlug()
             ]);
@@ -261,6 +271,11 @@ class TrickController extends AbstractController
 
         $manager->remove($trick);
         $manager->flush();
+
+        $this->addFlash(
+            'is-success',
+            'Le trick a bien été supprimé'
+        );
 
         return $this->redirectToRoute('index');
     }

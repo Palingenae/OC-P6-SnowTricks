@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\PasswordResetType;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
@@ -58,7 +60,6 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    // #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -74,5 +75,15 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Votre adresse email a bien été vérifiée');
 
         return $this->redirectToRoute('tricks');
+    }
+
+    public function resetPassword(Request $request): Response
+    {
+        $form = $this->createForm(PasswordResetType::class);
+        $form->handleRequest($request);
+
+        return $this->render('registration/reset-password.html.twig', [
+            'passwordResetForm' => $form->createView()
+        ]);
     }
 }

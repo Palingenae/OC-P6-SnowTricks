@@ -9,6 +9,11 @@
         <p class="hero__display-text">{{ trick.name }}</p>
     </section>
     <main class="main">
+        {% for message in app.flashes('is-success') %}
+        <div class="notification is-success">
+            {{ message }}
+        </div>
+        {% endfor %}
         <div class="trick__meta">
             <h2>Informations du trick</h2>
             {% if trick.author == app.user and is_granted('IS_AUTHENTICATED_FULLY') %}

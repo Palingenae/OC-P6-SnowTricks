@@ -59,13 +59,14 @@ class RegistrationFormType extends AbstractType
                         'class' => 'form__label',
                     ], ],
                 'second_options' => [
-                    'label' => 'Répétez le votre mot de passe',
+                    'label' => 'Répétez votre mot de passe',
                     'attr' => [
                         'class' => 'input',
                     ],
                     'label_attr' => [
                         'class' => 'form__label',
-                    ], ],
+                    ], 
+                ],
             ])
         ;
     }

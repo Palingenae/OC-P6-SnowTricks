@@ -10,39 +10,47 @@
         USER ||--|{ TRICK: creates
         USER ||--|{ MESSAGE: writes
         TRICK {
-            string name
-            string description
-            string slug
-            string coverImage
-            string image
-            string video
+            INT id
+            VARCHAR name
+            VARCHAR description
+            VARCHAR slug
+            INT cover_image_id
+            INT trick_group_id
+            INT author_id
         }
         USER {
-            string firstname
-            string lastname
-            string username
-            string emailAddress
-            string password
-            string profileImage
-            string token
+            INT id
+            VARCHAR firstname
+            VARCHAR lastname
+            VARCHAR username
+            VARCHAR email
+            VARCHAR password
+            JSON roles
+            TINYINT is_verified
+            INT profile_image_id
         }
         MESSAGE {
-            int user
-            int trick
-            string content
-            DateTime createdAt
+            INT id
+            INT writer_id
+            INT trick_id
+            VARCHAR content
+            DATETIME createdAt
         }
         TRICKGROUP {
-            string name
-            string tricks
+            INT id
+            VARCHAR name
         }
         IMAGE {
-            string fileName
-            string filePath
-            string description
+            INT id
+            VARCHAR fileName
+            VARCHAR filePath
+            VARCHAR description
+            INT trick_id
         }
         VIDEO {
-            string name
-            string url
+            INT id
+            VARCHAR name
+            VARCHAR url
+            VARCHAR description
         }
 ```

@@ -7,7 +7,7 @@
         Trick "1" --> "0..n" TrickGroup: belongs to
         Trick "1" --> "0..n" Image: has
         Trick "1" --> "0..n" Video: has
-        Trick "1" --> "0..n" Message: has
+        Trick "0..n" --> "1" Message: has
         User "1" --> "0..n" Trick: creates
         User "1" --> "0..n" Message: writes
         class Trick {

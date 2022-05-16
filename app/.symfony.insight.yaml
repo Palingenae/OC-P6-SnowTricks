@@ -1,0 +1,3 @@
+rules:
+  web.missing_favicon:
+    enabled: false
